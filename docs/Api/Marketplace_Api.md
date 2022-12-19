@@ -1,4 +1,4 @@
-# Swagger\Client\Marketplace_Api
+# Wildberries\Client\Marketplace_Api
 
 All URIs are relative to */*
 
@@ -25,7 +25,7 @@ Method | HTTP request | Description
 [**apiV3SuppliesSupplyOrdersOrderPatch**](Marketplace_Api.md#apiv3suppliessupplyordersorderpatch) | **PATCH** /api/v3/supplies/{supply}/orders/{order} | Добавить к поставке сборочное задание
 
 # **apiV2WarehousesGet**
-> \Swagger\Client\Model\InlineResponse20026[] apiV2WarehousesGet()
+> \Wildberries\Client\Model\InlineResponse20026[] apiV2WarehousesGet()
 
 Cписок складов
 
@@ -36,11 +36,11 @@ Cписок складов поставщика.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -61,7 +61,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20026[]**](../Model/InlineResponse20026.md)
+[**\Wildberries\Client\Model\InlineResponse20026[]**](../Model/InlineResponse20026.md)
 
 ### Authorization
 
@@ -75,7 +75,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3OrdersGet**
-> \Swagger\Client\Model\InlineResponse20036 apiV3OrdersGet($limit, $next, $date_from, $date_to)
+> \Wildberries\Client\Model\InlineResponse20036 apiV3OrdersGet($limit, $next, $date_from, $date_to)
 
 Получить информацию по сборочным заданиям
 
@@ -86,11 +86,11 @@ This endpoint does not need any parameter.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20036**](../Model/InlineResponse20036.md)
+[**\Wildberries\Client\Model\InlineResponse20036**](../Model/InlineResponse20036.md)
 
 ### Authorization
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3OrdersNewGet**
-> \Swagger\Client\Model\InlineResponse20037 apiV3OrdersNewGet()
+> \Wildberries\Client\Model\InlineResponse20037 apiV3OrdersNewGet()
 
 Получить список новых сборочных заданий
 
@@ -146,11 +146,11 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -171,7 +171,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20037**](../Model/InlineResponse20037.md)
+[**\Wildberries\Client\Model\InlineResponse20037**](../Model/InlineResponse20037.md)
 
 ### Authorization
 
@@ -196,11 +196,11 @@ This endpoint does not need any parameter.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -249,18 +249,18 @@ void (empty response body)
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $order = 789; // int | Идентификатор сборочного задания
-$body = new \Swagger\Client\Model\MetaSgtinBody(); // \Swagger\Client\Model\MetaSgtinBody | 
+$body = new \Wildberries\Client\Model\MetaSgtinBody(); // \Wildberries\Client\Model\MetaSgtinBody | 
 
 try {
     $apiInstance->apiV3OrdersOrderMetaSgtinPost($order, $body);
@@ -275,7 +275,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **order** | **int**| Идентификатор сборочного задания |
- **body** | [**\Swagger\Client\Model\MetaSgtinBody**](../Model/MetaSgtinBody.md)|  | [optional]
+ **body** | [**\Wildberries\Client\Model\MetaSgtinBody**](../Model/MetaSgtinBody.md)|  | [optional]
 
 ### Return type
 
@@ -293,7 +293,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3OrdersStatusPost**
-> \Swagger\Client\Model\InlineResponse20035 apiV3OrdersStatusPost($body)
+> \Wildberries\Client\Model\InlineResponse20035 apiV3OrdersStatusPost($body)
 
 Получить статусы сборочных заданий
 
@@ -304,17 +304,17 @@ void (empty response body)
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\OrdersStatusBody(); // \Swagger\Client\Model\OrdersStatusBody | 
+$body = new \Wildberries\Client\Model\OrdersStatusBody(); // \Wildberries\Client\Model\OrdersStatusBody | 
 
 try {
     $result = $apiInstance->apiV3OrdersStatusPost($body);
@@ -329,11 +329,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\OrdersStatusBody**](../Model/OrdersStatusBody.md)|  | [optional]
+ **body** | [**\Wildberries\Client\Model\OrdersStatusBody**](../Model/OrdersStatusBody.md)|  | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20035**](../Model/InlineResponse20035.md)
+[**\Wildberries\Client\Model\InlineResponse20035**](../Model/InlineResponse20035.md)
 
 ### Authorization
 
@@ -347,7 +347,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3OrdersStickersPost**
-> \Swagger\Client\Model\InlineResponse20038 apiV3OrdersStickersPost($type, $width, $height, $body)
+> \Wildberries\Client\Model\InlineResponse20038 apiV3OrdersStickersPost($type, $width, $height, $body)
 
 Получить этикетки для сборочных заданий
 
@@ -358,11 +358,11 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -371,7 +371,7 @@ $apiInstance = new Swagger\Client\Api\Marketplace_Api(
 $type = "type_example"; // string | Тип этикетки
 $width = 56; // int | Ширина этикетки
 $height = 56; // int | Высота этикетки
-$body = new \Swagger\Client\Model\OrdersStickersBody(); // \Swagger\Client\Model\OrdersStickersBody | 
+$body = new \Wildberries\Client\Model\OrdersStickersBody(); // \Wildberries\Client\Model\OrdersStickersBody | 
 
 try {
     $result = $apiInstance->apiV3OrdersStickersPost($type, $width, $height, $body);
@@ -389,11 +389,11 @@ Name | Type | Description  | Notes
  **type** | **string**| Тип этикетки |
  **width** | **int**| Ширина этикетки |
  **height** | **int**| Высота этикетки |
- **body** | [**\Swagger\Client\Model\OrdersStickersBody**](../Model/OrdersStickersBody.md)|  | [optional]
+ **body** | [**\Wildberries\Client\Model\OrdersStickersBody**](../Model/OrdersStickersBody.md)|  | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20038**](../Model/InlineResponse20038.md)
+[**\Wildberries\Client\Model\InlineResponse20038**](../Model/InlineResponse20038.md)
 
 ### Authorization
 
@@ -418,17 +418,17 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\StocksWarehouseBody2(); // \Swagger\Client\Model\StocksWarehouseBody2 | 
+$body = new \Wildberries\Client\Model\StocksWarehouseBody2(); // \Wildberries\Client\Model\StocksWarehouseBody2 | 
 $warehouse = 56; // int | Идентификатор склада поставщика
 
 try {
@@ -443,7 +443,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\StocksWarehouseBody2**](../Model/StocksWarehouseBody2.md)|  |
+ **body** | [**\Wildberries\Client\Model\StocksWarehouseBody2**](../Model/StocksWarehouseBody2.md)|  |
  **warehouse** | **int**| Идентификатор склада поставщика |
 
 ### Return type
@@ -462,7 +462,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3StocksWarehousePost**
-> \Swagger\Client\Model\InlineResponse20030 apiV3StocksWarehousePost($body, $warehouse)
+> \Wildberries\Client\Model\InlineResponse20030 apiV3StocksWarehousePost($body, $warehouse)
 
 Получить остатки товаров
 
@@ -473,17 +473,17 @@ void (empty response body)
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\StocksWarehouseBody1(); // \Swagger\Client\Model\StocksWarehouseBody1 | 
+$body = new \Wildberries\Client\Model\StocksWarehouseBody1(); // \Wildberries\Client\Model\StocksWarehouseBody1 | 
 $warehouse = 56; // int | Идентификатор склада поставщика
 
 try {
@@ -499,12 +499,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\StocksWarehouseBody1**](../Model/StocksWarehouseBody1.md)|  |
+ **body** | [**\Wildberries\Client\Model\StocksWarehouseBody1**](../Model/StocksWarehouseBody1.md)|  |
  **warehouse** | **int**| Идентификатор склада поставщика |
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20030**](../Model/InlineResponse20030.md)
+[**\Wildberries\Client\Model\InlineResponse20030**](../Model/InlineResponse20030.md)
 
 ### Authorization
 
@@ -529,17 +529,17 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\StocksWarehouseBody(); // \Swagger\Client\Model\StocksWarehouseBody | 
+$body = new \Wildberries\Client\Model\StocksWarehouseBody(); // \Wildberries\Client\Model\StocksWarehouseBody | 
 $warehouse = 56; // int | Идентификатор склада поставщика
 
 try {
@@ -554,7 +554,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\StocksWarehouseBody**](../Model/StocksWarehouseBody.md)|  |
+ **body** | [**\Wildberries\Client\Model\StocksWarehouseBody**](../Model/StocksWarehouseBody.md)|  |
  **warehouse** | **int**| Идентификатор склада поставщика |
 
 ### Return type
@@ -573,7 +573,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3SuppliesGet**
-> \Swagger\Client\Model\InlineResponse20031 apiV3SuppliesGet($limit, $next)
+> \Wildberries\Client\Model\InlineResponse20031 apiV3SuppliesGet($limit, $next)
 
 Получить список поставок
 
@@ -584,11 +584,11 @@ void (empty response body)
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -615,7 +615,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20031**](../Model/InlineResponse20031.md)
+[**\Wildberries\Client\Model\InlineResponse20031**](../Model/InlineResponse20031.md)
 
 ### Authorization
 
@@ -629,7 +629,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3SuppliesOrdersReshipmentGet**
-> \Swagger\Client\Model\InlineResponse20033 apiV3SuppliesOrdersReshipmentGet()
+> \Wildberries\Client\Model\InlineResponse20033 apiV3SuppliesOrdersReshipmentGet()
 
 Получить все сборочные задания на повторную отгрузку
 
@@ -640,11 +640,11 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -665,7 +665,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20033**](../Model/InlineResponse20033.md)
+[**\Wildberries\Client\Model\InlineResponse20033**](../Model/InlineResponse20033.md)
 
 ### Authorization
 
@@ -679,7 +679,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3SuppliesPost**
-> \Swagger\Client\Model\InlineResponse2011 apiV3SuppliesPost($body)
+> \Wildberries\Client\Model\InlineResponse2011 apiV3SuppliesPost($body)
 
 Создать новую поставку
 
@@ -690,17 +690,17 @@ This endpoint does not need any parameter.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\V3SuppliesBody(); // \Swagger\Client\Model\V3SuppliesBody | 
+$body = new \Wildberries\Client\Model\V3SuppliesBody(); // \Wildberries\Client\Model\V3SuppliesBody | 
 
 try {
     $result = $apiInstance->apiV3SuppliesPost($body);
@@ -715,11 +715,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\V3SuppliesBody**](../Model/V3SuppliesBody.md)|  |
+ **body** | [**\Wildberries\Client\Model\V3SuppliesBody**](../Model/V3SuppliesBody.md)|  |
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse2011**](../Model/InlineResponse2011.md)
+[**\Wildberries\Client\Model\InlineResponse2011**](../Model/InlineResponse2011.md)
 
 ### Authorization
 
@@ -733,7 +733,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3SuppliesSupplyBarcodeGet**
-> \Swagger\Client\Model\InlineResponse20034 apiV3SuppliesSupplyBarcodeGet($supply, $type, $width, $height)
+> \Wildberries\Client\Model\InlineResponse20034 apiV3SuppliesSupplyBarcodeGet($supply, $type, $width, $height)
 
 Получить QR поставки
 
@@ -744,11 +744,11 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -779,7 +779,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20034**](../Model/InlineResponse20034.md)
+[**\Wildberries\Client\Model\InlineResponse20034**](../Model/InlineResponse20034.md)
 
 ### Authorization
 
@@ -804,11 +804,11 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -857,11 +857,11 @@ void (empty response body)
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -899,7 +899,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3SuppliesSupplyGet**
-> \Swagger\Client\Model\Supply apiV3SuppliesSupplyGet($supply)
+> \Wildberries\Client\Model\Supply apiV3SuppliesSupplyGet($supply)
 
 Получить информацию о поставке
 
@@ -910,11 +910,11 @@ void (empty response body)
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -939,7 +939,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Supply**](../Model/Supply.md)
+[**\Wildberries\Client\Model\Supply**](../Model/Supply.md)
 
 ### Authorization
 
@@ -953,7 +953,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3SuppliesSupplyOrdersGet**
-> \Swagger\Client\Model\InlineResponse20032 apiV3SuppliesSupplyOrdersGet($supply)
+> \Wildberries\Client\Model\InlineResponse20032 apiV3SuppliesSupplyOrdersGet($supply)
 
 Получить сборочные задания в поставке
 
@@ -964,11 +964,11 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -993,7 +993,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InlineResponse20032**](../Model/InlineResponse20032.md)
+[**\Wildberries\Client\Model\InlineResponse20032**](../Model/InlineResponse20032.md)
 
 ### Authorization
 
@@ -1018,11 +1018,11 @@ Name | Type | Description  | Notes
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure API key authorization: HeaderApiKey
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\Marketplace_Api(
+$apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),

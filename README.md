@@ -191,7 +191,7 @@ $apiInstance = new Wildberries\Client\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$body = array(new \Swagger\Client\Model\V1PricesBody()); // \Swagger\Client\Model\V1PricesBody[] | 
+$body = array(new \Wildberries\Client\Model\V1PricesBody()); // \Wildberries\Client\Model\V1PricesBody[] | 
 
 try {
     $apiInstance->publicApiV1PricesPost($body);

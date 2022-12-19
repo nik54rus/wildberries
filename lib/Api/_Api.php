@@ -4,28 +4,28 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @package  Wildberries\Client
+ * @author   Wildberries Codegen team
+ * @link     https://github.com/Wildberries-api/Wildberries-codegen
  */
 
 /**
  * API продавца
  *
- * # Общее описание <style> .version {   border: 0.1rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #32329FE6;   height: 25px;   width: 150px;   text-align: center }, </style> <style> .warning {   border: 1.6rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #247706;   text-align: center } </style>  Wildberries API предоставляет продавцам возможность управления магазином и получения оперативной и статистической информации по протоколу HTTP RestAPI. <br> Описание API предоставляется в формате [Swagger](https://swagger.io/) (Open API) и может быть использовано для импорта в другие инструменты (такие как PostMan) или генерации клиентского кода на различных языках программирования с помощью [Swagger CodeGen](https://swagger.io/tools/swagger-codegen/)  <ul> <li> Описание в оригинальном swagger-формате <a href=\"/swagger\">swagger</a> <li> OpenAPI-файл <a href=\"/swagger.yaml\">swagger.yaml</a> </ul>  <br> Для ручной проверки API вы можете использовать: <ul> <li> Под ОС Windows - [PostMan](https://www.postman.com/) <li> Под ОС Linux - [curl](https://curl.se/)  </ul>  ## Поддержка <br> Техническая поддержка осуществляется через обращения в личном кабинете продавца. При создании нового обращения в техподдержку используйте категорию API. <br> Новости и изменения, касающиеся API, публикуются в [новостной ленте Wildberries](https://seller.wildberries.ru/news). <br> Также готовятся к публикации Release Notes по API на сайте.  После их выхода будет сделан соответствующий анонс.   ## Авторизация Вызов любого метода API должен быть авторизован.  Авторизация осуществляется по ключам API, которые  владелец личного кабинета (главный пользователь) самостоятельно  генерирует в разделе   [Профиль --> Настройки --> Доступ к API](https://seller.wildberries.ru/supplier-settings/access-to-api) для статистики   и [Профиль --> Настройки --> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api) для остальных методов.   <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a> управление всеми ключами будет перенесено в единую вкладку. </p>  ### Авторизация для методов Статистики При работе с методами Статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к API\". <br>Созданный ключ отображается в личном кабинете как \"Ключ для работы с API статистики x64\". <br>Его следует скопировать и добавлять в каждый запрос, прибавляя к запросу параметр `key`. <br>Выглядеть запрос будет примерно так: `https://suppliers-stats.wildberries.ru/api/v1/supplier/stocks?dateFrom=2022-03-25&key=.........`  <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: <ul>   <li>Управление всеми ключами будет перенесено в единую вкладку   <li>Для доступа к API Статистики нужно будет указывать домен <code><b>https://statistics-api.wildberries.ru</b></code>   <li>Ключ авторизации необходимо будет указывать в HTTP-заголовке <code>Authorization</code>, а не в строке параметров </ul> </p>  ### Авторизация для нестатистических методов При работе со всеми методами кроме статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к новому API\". <br>Обратите внимание, что ключ отображается ТОЛЬКО в момент создания. Его надо сохранить, потому что больше его отобразить будет нельзя. <br>Созданный ключ следует добавлять в каждый запрос, прибавляя к запросу заголовок (http-header) формата `Authorization: .........`. <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: данный раздел ЛК можно будет использовать для управления всеми типами ключей. </p>  ## Форматы ### Дата и время Во всех методах API статистики дата и время передаются в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339).  <br> В большинстве случаев вы можете передать дату или дату со временем. Если время не указано, оно принимается равным 00:00:00. Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает часовой пояс UTC. При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br> Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>  ## АНОНС - Единый ЛК управления ключами API WILDBERRIES начинает постепенный перевод аккаунтов на новую (единую) схему управления токенами («ключами») публичного API продавцов.  <br> <br> **ВАЖНО** : описанные ниже изменения будут становиться доступными для продавцов постепенно в течение ноября 2022г. Если изменения уже стали доступны, в настройках магазина из-под аккаунта Владельца останется одна вкладка `Доступ в новому API` вместо двух.  <br> <br> Теперь управление **всеми** ключами программного доступа к магазину будет осуществляться в интерфейсе, доступном по адресу [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api). <br> Для создаваемых ключей теперь указывается `Тип ключа`, который определяет, к какой группе сервисов данный ключ имеет доступ.  На данный момент доступно два типа, список будет расширяться: <ul> <li> `Стандартный`: дает доступ к методам API Контент, Маркетплейс, Цены и Скидки. <li> `Статистика`: дает доступ только к отчетам по статистике </ul> <br> Также при создании ключа необходимо указать его Имя - произвольную строку, которая будет  выводиться в списке ключей в качестве подсказки. Пример: \"Для онлайн бухгалтерии\"  ### Информация для пользователей API статистики  Предыдущие версии ключей (так называемые `Ключ для работы с API статистики x64`) продолжат работать в прежнем режиме. По завершении перевода всех аккаунтов на новую схему сообщим об этом отдельной новостью, где также укажем дату, до которой будут поддерживаться старые токены «x32» и «x64» (ориентировочно до середины января). <br> <br>С 29 ноября новые аккаунты будут создаваться сразу с новой схемой управления токенами. <br> Чтобы перейти со старого ключа на новый, следуйте инструкции: 1. Сгенерируйте новый ключ в разделе [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api).    <br><b>Важно</b>: при генерации выберите тип ключа `Статистика` 2. Новый ключ следует указывать в HTTP-заголовке `Authorization`.    <br>Его не надо указывать в самом запросе как раньше (так называемых query parameters),    то есть параметр `&key=...` следует удалить из запроса 3. При обращении за статистикой необходимо сменить адрес (endpoint) с https://suppliers-stats.wildberries.ru/ на https://statistics-api.wildberries.ru/   ## Release Notes  #### 2022.10.31 v1.4  Метод будет отключен 2022.10.31 в v1.4: <ul> <li> `/content/v1/cards/list` </ul>  #### 2022.09.20 v1.2  В связи с переходом на новое API Контента старые методы будут отключены. К их числу относятся: <ul> <li> `/card/_*` <li> `/api/v1/config/_*` <li> `/api/v1/directory/_*` </ul> Данные методы теперь возвращают код 404.  Новое API Контента описано в данном документе в разделах Контент / *
+ * # Общее описание <style> .version {   border: 0.1rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #32329FE6;   height: 25px;   width: 150px;   text-align: center }, </style> <style> .warning {   border: 1.6rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #247706;   text-align: center } </style>  Wildberries API предоставляет продавцам возможность управления магазином и получения оперативной и статистической информации по протоколу HTTP RestAPI. <br> Описание API предоставляется в формате [Wildberries](https://Wildberries.io/) (Open API) и может быть использовано для импорта в другие инструменты (такие как PostMan) или генерации клиентского кода на различных языках программирования с помощью [Wildberries CodeGen](https://Wildberries.io/tools/Wildberries-codegen/)  <ul> <li> Описание в оригинальном Wildberries-формате <a href=\"/Wildberries\">Wildberries</a> <li> OpenAPI-файл <a href=\"/Wildberries.yaml\">Wildberries.yaml</a> </ul>  <br> Для ручной проверки API вы можете использовать: <ul> <li> Под ОС Windows - [PostMan](https://www.postman.com/) <li> Под ОС Linux - [curl](https://curl.se/)  </ul>  ## Поддержка <br> Техническая поддержка осуществляется через обращения в личном кабинете продавца. При создании нового обращения в техподдержку используйте категорию API. <br> Новости и изменения, касающиеся API, публикуются в [новостной ленте Wildberries](https://seller.wildberries.ru/news). <br> Также готовятся к публикации Release Notes по API на сайте.  После их выхода будет сделан соответствующий анонс.   ## Авторизация Вызов любого метода API должен быть авторизован.  Авторизация осуществляется по ключам API, которые  владелец личного кабинета (главный пользователь) самостоятельно  генерирует в разделе   [Профиль --> Настройки --> Доступ к API](https://seller.wildberries.ru/supplier-settings/access-to-api) для статистики   и [Профиль --> Настройки --> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api) для остальных методов.   <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a> управление всеми ключами будет перенесено в единую вкладку. </p>  ### Авторизация для методов Статистики При работе с методами Статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к API\". <br>Созданный ключ отображается в личном кабинете как \"Ключ для работы с API статистики x64\". <br>Его следует скопировать и добавлять в каждый запрос, прибавляя к запросу параметр `key`. <br>Выглядеть запрос будет примерно так: `https://suppliers-stats.wildberries.ru/api/v1/supplier/stocks?dateFrom=2022-03-25&key=.........`  <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: <ul>   <li>Управление всеми ключами будет перенесено в единую вкладку   <li>Для доступа к API Статистики нужно будет указывать домен <code><b>https://statistics-api.wildberries.ru</b></code>   <li>Ключ авторизации необходимо будет указывать в HTTP-заголовке <code>Authorization</code>, а не в строке параметров </ul> </p>  ### Авторизация для нестатистических методов При работе со всеми методами кроме статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к новому API\". <br>Обратите внимание, что ключ отображается ТОЛЬКО в момент создания. Его надо сохранить, потому что больше его отобразить будет нельзя. <br>Созданный ключ следует добавлять в каждый запрос, прибавляя к запросу заголовок (http-header) формата `Authorization: .........`. <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: данный раздел ЛК можно будет использовать для управления всеми типами ключей. </p>  ## Форматы ### Дата и время Во всех методах API статистики дата и время передаются в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339).  <br> В большинстве случаев вы можете передать дату или дату со временем. Если время не указано, оно принимается равным 00:00:00. Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает часовой пояс UTC. При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br> Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>  ## АНОНС - Единый ЛК управления ключами API WILDBERRIES начинает постепенный перевод аккаунтов на новую (единую) схему управления токенами («ключами») публичного API продавцов.  <br> <br> **ВАЖНО** : описанные ниже изменения будут становиться доступными для продавцов постепенно в течение ноября 2022г. Если изменения уже стали доступны, в настройках магазина из-под аккаунта Владельца останется одна вкладка `Доступ в новому API` вместо двух.  <br> <br> Теперь управление **всеми** ключами программного доступа к магазину будет осуществляться в интерфейсе, доступном по адресу [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api). <br> Для создаваемых ключей теперь указывается `Тип ключа`, который определяет, к какой группе сервисов данный ключ имеет доступ.  На данный момент доступно два типа, список будет расширяться: <ul> <li> `Стандартный`: дает доступ к методам API Контент, Маркетплейс, Цены и Скидки. <li> `Статистика`: дает доступ только к отчетам по статистике </ul> <br> Также при создании ключа необходимо указать его Имя - произвольную строку, которая будет  выводиться в списке ключей в качестве подсказки. Пример: \"Для онлайн бухгалтерии\"  ### Информация для пользователей API статистики  Предыдущие версии ключей (так называемые `Ключ для работы с API статистики x64`) продолжат работать в прежнем режиме. По завершении перевода всех аккаунтов на новую схему сообщим об этом отдельной новостью, где также укажем дату, до которой будут поддерживаться старые токены «x32» и «x64» (ориентировочно до середины января). <br> <br>С 29 ноября новые аккаунты будут создаваться сразу с новой схемой управления токенами. <br> Чтобы перейти со старого ключа на новый, следуйте инструкции: 1. Сгенерируйте новый ключ в разделе [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api).    <br><b>Важно</b>: при генерации выберите тип ключа `Статистика` 2. Новый ключ следует указывать в HTTP-заголовке `Authorization`.    <br>Его не надо указывать в самом запросе как раньше (так называемых query parameters),    то есть параметр `&key=...` следует удалить из запроса 3. При обращении за статистикой необходимо сменить адрес (endpoint) с https://suppliers-stats.wildberries.ru/ на https://statistics-api.wildberries.ru/   ## Release Notes  #### 2022.10.31 v1.4  Метод будет отключен 2022.10.31 в v1.4: <ul> <li> `/content/v1/cards/list` </ul>  #### 2022.09.20 v1.2  В связи с переходом на новое API Контента старые методы будут отключены. К их числу относятся: <ul> <li> `/card/_*` <li> `/api/v1/config/_*` <li> `/api/v1/directory/_*` </ul> Данные методы теперь возвращают код 404.  Новое API Контента описано в данном документе в разделах Контент / *
  *
  * OpenAPI spec version: 1.4
  * 
- * Generated by: https://github.com/swagger-api/swagger-codegen.git
- * Swagger Codegen version: 3.0.36
+ * Generated by: https://github.com/Wildberries-api/Wildberries-codegen.git
+ * Wildberries Codegen version: 3.0.36
  */
 /**
- * NOTE: This class is auto generated by the swagger code generator program.
- * https://github.com/swagger-api/swagger-codegen
+ * NOTE: This class is auto generated by the Wildberries code generator program.
+ * https://github.com/Wildberries-api/Wildberries-codegen
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Wildberries\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,18 +33,18 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Wildberries\Client\ApiException;
+use Wildberries\Client\Configuration;
+use Wildberries\Client\HeaderSelector;
+use Wildberries\Client\ObjectSerializer;
 
 /**
  * _Api Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @package  Wildberries\Client
+ * @author   Wildberries Codegen team
+ * @link     https://github.com/Wildberries-api/Wildberries-codegen
  */
 class _Api
 {
@@ -91,11 +91,11 @@ class _Api
      *
      * Генерация баркодов
      *
-     * @param  \Swagger\Client\Model\V1BarcodesBody $body body (required)
+     * @param  \Wildberries\Client\Model\V1BarcodesBody $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2006
+     * @return \Wildberries\Client\Model\InlineResponse2006
      */
     public function contentV1BarcodesPost($body)
     {
@@ -108,15 +108,15 @@ class _Api
      *
      * Генерация баркодов
      *
-     * @param  \Swagger\Client\Model\V1BarcodesBody $body (required)
+     * @param  \Wildberries\Client\Model\V1BarcodesBody $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2006, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2006, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1BarcodesPostWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2006';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2006';
         $request = $this->contentV1BarcodesPostRequest($body);
 
         try {
@@ -168,7 +168,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2006',
+                        '\Wildberries\Client\Model\InlineResponse2006',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -176,7 +176,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -191,7 +191,7 @@ class _Api
      *
      * Генерация баркодов
      *
-     * @param  \Swagger\Client\Model\V1BarcodesBody $body (required)
+     * @param  \Wildberries\Client\Model\V1BarcodesBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -211,14 +211,14 @@ class _Api
      *
      * Генерация баркодов
      *
-     * @param  \Swagger\Client\Model\V1BarcodesBody $body (required)
+     * @param  \Wildberries\Client\Model\V1BarcodesBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function contentV1BarcodesPostAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2006';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2006';
         $request = $this->contentV1BarcodesPostRequest($body);
 
         return $this->client
@@ -261,7 +261,7 @@ class _Api
     /**
      * Create request for operation 'contentV1BarcodesPost'
      *
-     * @param  \Swagger\Client\Model\V1BarcodesBody $body (required)
+     * @param  \Wildberries\Client\Model\V1BarcodesBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -361,11 +361,11 @@ class _Api
      *
      * Список НМ v2
      *
-     * @param  \Swagger\Client\Model\CursorListBody $body body (required)
+     * @param  \Wildberries\Client\Model\CursorListBody $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2003
+     * @return \Wildberries\Client\Model\InlineResponse2003
      */
     public function contentV1CardsCursorListPost($body)
     {
@@ -378,15 +378,15 @@ class _Api
      *
      * Список НМ v2
      *
-     * @param  \Swagger\Client\Model\CursorListBody $body (required)
+     * @param  \Wildberries\Client\Model\CursorListBody $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2003, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2003, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1CardsCursorListPostWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2003';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2003';
         $request = $this->contentV1CardsCursorListPostRequest($body);
 
         try {
@@ -438,7 +438,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2003',
+                        '\Wildberries\Client\Model\InlineResponse2003',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -453,7 +453,7 @@ class _Api
      *
      * Список НМ v2
      *
-     * @param  \Swagger\Client\Model\CursorListBody $body (required)
+     * @param  \Wildberries\Client\Model\CursorListBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -473,14 +473,14 @@ class _Api
      *
      * Список НМ v2
      *
-     * @param  \Swagger\Client\Model\CursorListBody $body (required)
+     * @param  \Wildberries\Client\Model\CursorListBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function contentV1CardsCursorListPostAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2003';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2003';
         $request = $this->contentV1CardsCursorListPostRequest($body);
 
         return $this->client
@@ -523,7 +523,7 @@ class _Api
     /**
      * Create request for operation 'contentV1CardsCursorListPost'
      *
-     * @param  \Swagger\Client\Model\CursorListBody $body (required)
+     * @param  \Wildberries\Client\Model\CursorListBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -624,9 +624,9 @@ class _Api
      * Список несозданных НМ с ошибками
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2004
+     * @return \Wildberries\Client\Model\InlineResponse2004
      */
     public function contentV1CardsErrorListGet()
     {
@@ -640,13 +640,13 @@ class _Api
      * Список несозданных НМ с ошибками
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2004, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2004, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1CardsErrorListGetWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2004';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2004';
         $request = $this->contentV1CardsErrorListGetRequest();
 
         try {
@@ -698,7 +698,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2004',
+                        '\Wildberries\Client\Model\InlineResponse2004',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -706,7 +706,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -714,7 +714,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -754,7 +754,7 @@ class _Api
      */
     public function contentV1CardsErrorListGetAsyncWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2004';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2004';
         $request = $this->contentV1CardsErrorListGetRequest();
 
         return $this->client
@@ -887,11 +887,11 @@ class _Api
      *
      * Получение КТ по вендор кодам (артикулам)
      *
-     * @param  \Swagger\Client\Model\CardsFilterBody $body body (required)
+     * @param  \Wildberries\Client\Model\CardsFilterBody $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2005
+     * @return \Wildberries\Client\Model\InlineResponse2005
      */
     public function contentV1CardsFilterPost($body)
     {
@@ -904,15 +904,15 @@ class _Api
      *
      * Получение КТ по вендор кодам (артикулам)
      *
-     * @param  \Swagger\Client\Model\CardsFilterBody $body (required)
+     * @param  \Wildberries\Client\Model\CardsFilterBody $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2005, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2005, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1CardsFilterPostWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2005';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2005';
         $request = $this->contentV1CardsFilterPostRequest($body);
 
         try {
@@ -964,7 +964,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2005',
+                        '\Wildberries\Client\Model\InlineResponse2005',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -972,7 +972,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -980,7 +980,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -995,7 +995,7 @@ class _Api
      *
      * Получение КТ по вендор кодам (артикулам)
      *
-     * @param  \Swagger\Client\Model\CardsFilterBody $body (required)
+     * @param  \Wildberries\Client\Model\CardsFilterBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1015,14 +1015,14 @@ class _Api
      *
      * Получение КТ по вендор кодам (артикулам)
      *
-     * @param  \Swagger\Client\Model\CardsFilterBody $body (required)
+     * @param  \Wildberries\Client\Model\CardsFilterBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function contentV1CardsFilterPostAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2005';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2005';
         $request = $this->contentV1CardsFilterPostRequest($body);
 
         return $this->client
@@ -1065,7 +1065,7 @@ class _Api
     /**
      * Create request for operation 'contentV1CardsFilterPost'
      *
-     * @param  \Swagger\Client\Model\CardsFilterBody $body (required)
+     * @param  \Wildberries\Client\Model\CardsFilterBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1165,11 +1165,11 @@ class _Api
      *
      * Редактирование КТ
      *
-     * @param  \Swagger\Client\Model\CardsUpdateBody[] $body body (required)
+     * @param  \Wildberries\Client\Model\CardsUpdateBody[] $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2002
+     * @return \Wildberries\Client\Model\InlineResponse2002
      */
     public function contentV1CardsUpdatePost($body)
     {
@@ -1182,15 +1182,15 @@ class _Api
      *
      * Редактирование КТ
      *
-     * @param  \Swagger\Client\Model\CardsUpdateBody[] $body (required)
+     * @param  \Wildberries\Client\Model\CardsUpdateBody[] $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1CardsUpdatePostWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1CardsUpdatePostRequest($body);
 
         try {
@@ -1242,7 +1242,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2002',
+                        '\Wildberries\Client\Model\InlineResponse2002',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1250,7 +1250,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1258,7 +1258,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1273,7 +1273,7 @@ class _Api
      *
      * Редактирование КТ
      *
-     * @param  \Swagger\Client\Model\CardsUpdateBody[] $body (required)
+     * @param  \Wildberries\Client\Model\CardsUpdateBody[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1293,14 +1293,14 @@ class _Api
      *
      * Редактирование КТ
      *
-     * @param  \Swagger\Client\Model\CardsUpdateBody[] $body (required)
+     * @param  \Wildberries\Client\Model\CardsUpdateBody[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function contentV1CardsUpdatePostAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1CardsUpdatePostRequest($body);
 
         return $this->client
@@ -1343,7 +1343,7 @@ class _Api
     /**
      * Create request for operation 'contentV1CardsUpdatePost'
      *
-     * @param  \Swagger\Client\Model\CardsUpdateBody[] $body (required)
+     * @param  \Wildberries\Client\Model\CardsUpdateBody[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1443,11 +1443,11 @@ class _Api
      *
      * Добавление НМ к КТ
      *
-     * @param  \Swagger\Client\Model\UploadAddBody $body body (required)
+     * @param  \Wildberries\Client\Model\UploadAddBody $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2002
+     * @return \Wildberries\Client\Model\InlineResponse2002
      */
     public function contentV1CardsUploadAddPost($body)
     {
@@ -1460,15 +1460,15 @@ class _Api
      *
      * Добавление НМ к КТ
      *
-     * @param  \Swagger\Client\Model\UploadAddBody $body (required)
+     * @param  \Wildberries\Client\Model\UploadAddBody $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1CardsUploadAddPostWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1CardsUploadAddPostRequest($body);
 
         try {
@@ -1520,7 +1520,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2002',
+                        '\Wildberries\Client\Model\InlineResponse2002',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1528,7 +1528,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1536,7 +1536,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1551,7 +1551,7 @@ class _Api
      *
      * Добавление НМ к КТ
      *
-     * @param  \Swagger\Client\Model\UploadAddBody $body (required)
+     * @param  \Wildberries\Client\Model\UploadAddBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1571,14 +1571,14 @@ class _Api
      *
      * Добавление НМ к КТ
      *
-     * @param  \Swagger\Client\Model\UploadAddBody $body (required)
+     * @param  \Wildberries\Client\Model\UploadAddBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function contentV1CardsUploadAddPostAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1CardsUploadAddPostRequest($body);
 
         return $this->client
@@ -1621,7 +1621,7 @@ class _Api
     /**
      * Create request for operation 'contentV1CardsUploadAddPost'
      *
-     * @param  \Swagger\Client\Model\UploadAddBody $body (required)
+     * @param  \Wildberries\Client\Model\UploadAddBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1723,9 +1723,9 @@ class _Api
      *
      * @param  object[][] $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2002
+     * @return \Wildberries\Client\Model\InlineResponse2002
      */
     public function contentV1CardsUploadPost($body)
     {
@@ -1740,13 +1740,13 @@ class _Api
      *
      * @param  object[][] $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1CardsUploadPostWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1CardsUploadPostRequest($body);
 
         try {
@@ -1798,7 +1798,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2002',
+                        '\Wildberries\Client\Model\InlineResponse2002',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1806,7 +1806,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1814,7 +1814,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1856,7 +1856,7 @@ class _Api
      */
     public function contentV1CardsUploadPostAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1CardsUploadPostRequest($body);
 
         return $this->client
@@ -2002,9 +2002,9 @@ class _Api
      * @param  int $top Количество запрашиваемых значений (максимум 5000) (optional)
      * @param  string $pattern Поиск по наименованию значения характеристики (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20018
+     * @return \Wildberries\Client\Model\InlineResponse20018
      */
     public function contentV1DirectoryBrandsGet($top = null, $pattern = null)
     {
@@ -2020,13 +2020,13 @@ class _Api
      * @param  int $top Количество запрашиваемых значений (максимум 5000) (optional)
      * @param  string $pattern Поиск по наименованию значения характеристики (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20018, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20018, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectoryBrandsGetWithHttpInfo($top = null, $pattern = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20018';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20018';
         $request = $this->contentV1DirectoryBrandsGetRequest($top, $pattern);
 
         try {
@@ -2078,7 +2078,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20018',
+                        '\Wildberries\Client\Model\InlineResponse20018',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2086,7 +2086,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2094,7 +2094,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2138,7 +2138,7 @@ class _Api
      */
     public function contentV1DirectoryBrandsGetAsyncWithHttpInfo($top = null, $pattern = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20018';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20018';
         $request = $this->contentV1DirectoryBrandsGetRequest($top, $pattern);
 
         return $this->client
@@ -2284,9 +2284,9 @@ class _Api
      * @param  int $top Количество запрашиваемых значений (максимум 5000) (optional)
      * @param  string $pattern Поиск по наименованию значения характеристики (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20014
+     * @return \Wildberries\Client\Model\InlineResponse20014
      */
     public function contentV1DirectoryCollectionsGet($top = null, $pattern = null)
     {
@@ -2302,13 +2302,13 @@ class _Api
      * @param  int $top Количество запрашиваемых значений (максимум 5000) (optional)
      * @param  string $pattern Поиск по наименованию значения характеристики (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20014, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20014, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectoryCollectionsGetWithHttpInfo($top = null, $pattern = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20014';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20014';
         $request = $this->contentV1DirectoryCollectionsGetRequest($top, $pattern);
 
         try {
@@ -2360,7 +2360,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20014',
+                        '\Wildberries\Client\Model\InlineResponse20014',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2368,7 +2368,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2376,7 +2376,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2420,7 +2420,7 @@ class _Api
      */
     public function contentV1DirectoryCollectionsGetAsyncWithHttpInfo($top = null, $pattern = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20014';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20014';
         $request = $this->contentV1DirectoryCollectionsGetRequest($top, $pattern);
 
         return $this->client
@@ -2564,9 +2564,9 @@ class _Api
      * Цвет
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20011
+     * @return \Wildberries\Client\Model\InlineResponse20011
      */
     public function contentV1DirectoryColorsGet()
     {
@@ -2580,13 +2580,13 @@ class _Api
      * Цвет
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20011, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20011, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectoryColorsGetWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20011';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20011';
         $request = $this->contentV1DirectoryColorsGetRequest();
 
         try {
@@ -2638,7 +2638,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20011',
+                        '\Wildberries\Client\Model\InlineResponse20011',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2646,7 +2646,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2654,7 +2654,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2694,7 +2694,7 @@ class _Api
      */
     public function contentV1DirectoryColorsGetAsyncWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20011';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20011';
         $request = $this->contentV1DirectoryColorsGetRequest();
 
         return $this->client
@@ -2830,9 +2830,9 @@ class _Api
      * @param  int $top Количество запрашиваемых значений (максимум 5000) (optional)
      * @param  string $pattern Поиск по наименованию значения характеристики (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20017
+     * @return \Wildberries\Client\Model\InlineResponse20017
      */
     public function contentV1DirectoryConsistsGet($top = null, $pattern = null)
     {
@@ -2848,13 +2848,13 @@ class _Api
      * @param  int $top Количество запрашиваемых значений (максимум 5000) (optional)
      * @param  string $pattern Поиск по наименованию значения характеристики (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20017, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20017, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectoryConsistsGetWithHttpInfo($top = null, $pattern = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20017';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20017';
         $request = $this->contentV1DirectoryConsistsGetRequest($top, $pattern);
 
         try {
@@ -2906,7 +2906,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20017',
+                        '\Wildberries\Client\Model\InlineResponse20017',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2914,7 +2914,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2922,7 +2922,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2966,7 +2966,7 @@ class _Api
      */
     public function contentV1DirectoryConsistsGetAsyncWithHttpInfo($top = null, $pattern = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20017';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20017';
         $request = $this->contentV1DirectoryConsistsGetRequest($top, $pattern);
 
         return $this->client
@@ -3112,9 +3112,9 @@ class _Api
      * @param  int $top Количество запрашиваемых значений (optional)
      * @param  string $pattern Поиск по наименованию значения характеристики (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20016
+     * @return \Wildberries\Client\Model\InlineResponse20016
      */
     public function contentV1DirectoryContentsGet($top = null, $pattern = null)
     {
@@ -3130,13 +3130,13 @@ class _Api
      * @param  int $top Количество запрашиваемых значений (optional)
      * @param  string $pattern Поиск по наименованию значения характеристики (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20016, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20016, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectoryContentsGetWithHttpInfo($top = null, $pattern = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20016';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20016';
         $request = $this->contentV1DirectoryContentsGetRequest($top, $pattern);
 
         try {
@@ -3188,7 +3188,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20016',
+                        '\Wildberries\Client\Model\InlineResponse20016',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3196,7 +3196,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3204,7 +3204,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3248,7 +3248,7 @@ class _Api
      */
     public function contentV1DirectoryContentsGetAsyncWithHttpInfo($top = null, $pattern = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20016';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20016';
         $request = $this->contentV1DirectoryContentsGetRequest($top, $pattern);
 
         return $this->client
@@ -3392,9 +3392,9 @@ class _Api
      * Страна Производства
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20013
+     * @return \Wildberries\Client\Model\InlineResponse20013
      */
     public function contentV1DirectoryCountriesGet()
     {
@@ -3408,13 +3408,13 @@ class _Api
      * Страна Производства
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20013, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20013, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectoryCountriesGetWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20013';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20013';
         $request = $this->contentV1DirectoryCountriesGetRequest();
 
         try {
@@ -3466,7 +3466,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20013',
+                        '\Wildberries\Client\Model\InlineResponse20013',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3474,7 +3474,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3514,7 +3514,7 @@ class _Api
      */
     public function contentV1DirectoryCountriesGetAsyncWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20013';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20013';
         $request = $this->contentV1DirectoryCountriesGetRequest();
 
         return $this->client
@@ -3648,9 +3648,9 @@ class _Api
      * Пол
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20012
+     * @return \Wildberries\Client\Model\InlineResponse20012
      */
     public function contentV1DirectoryKindsGet()
     {
@@ -3664,13 +3664,13 @@ class _Api
      * Пол
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20012, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20012, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectoryKindsGetWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20012';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20012';
         $request = $this->contentV1DirectoryKindsGetRequest();
 
         try {
@@ -3722,7 +3722,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20012',
+                        '\Wildberries\Client\Model\InlineResponse20012',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3730,7 +3730,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3738,7 +3738,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3778,7 +3778,7 @@ class _Api
      */
     public function contentV1DirectoryKindsGetAsyncWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20012';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20012';
         $request = $this->contentV1DirectoryKindsGetRequest();
 
         return $this->client
@@ -3912,9 +3912,9 @@ class _Api
      * Сезон
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20015
+     * @return \Wildberries\Client\Model\InlineResponse20015
      */
     public function contentV1DirectorySeasonsGet()
     {
@@ -3928,13 +3928,13 @@ class _Api
      * Сезон
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20015, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20015, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectorySeasonsGetWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20015';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20015';
         $request = $this->contentV1DirectorySeasonsGetRequest();
 
         try {
@@ -3986,7 +3986,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20015',
+                        '\Wildberries\Client\Model\InlineResponse20015',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3994,7 +3994,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4002,7 +4002,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4042,7 +4042,7 @@ class _Api
      */
     public function contentV1DirectorySeasonsGetAsyncWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20015';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20015';
         $request = $this->contentV1DirectorySeasonsGetRequest();
 
         return $this->client
@@ -4178,9 +4178,9 @@ class _Api
      * @param  string $object_name Поиск по наименованию категории (optional)
      * @param  string $tnveds_like Поиск по коду ТНВЭД (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20019
+     * @return \Wildberries\Client\Model\InlineResponse20019
      */
     public function contentV1DirectoryTnvedGet($object_name = null, $tnveds_like = null)
     {
@@ -4196,13 +4196,13 @@ class _Api
      * @param  string $object_name Поиск по наименованию категории (optional)
      * @param  string $tnveds_like Поиск по коду ТНВЭД (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20019, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20019, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1DirectoryTnvedGetWithHttpInfo($object_name = null, $tnveds_like = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20019';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20019';
         $request = $this->contentV1DirectoryTnvedGetRequest($object_name, $tnveds_like);
 
         try {
@@ -4254,7 +4254,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20019',
+                        '\Wildberries\Client\Model\InlineResponse20019',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4262,7 +4262,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4270,7 +4270,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4314,7 +4314,7 @@ class _Api
      */
     public function contentV1DirectoryTnvedGetAsyncWithHttpInfo($object_name = null, $tnveds_like = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20019';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20019';
         $request = $this->contentV1DirectoryTnvedGetRequest($object_name, $tnveds_like);
 
         return $this->client
@@ -4461,9 +4461,9 @@ class _Api
      * @param  string $x_vendor_code Артикул НМ (required)
      * @param  int $x_photo_number Номер медиафайла на загрузку. &lt;b&gt;Начинать с 1&lt;/b&gt;. &lt;br&gt;Чтобы добавить фото к уже загруженным в НМ, номер медиафайла должен быть больше кол-ва загруженных в НМ медиафайлов. (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2002
+     * @return \Wildberries\Client\Model\InlineResponse2002
      */
     public function contentV1MediaFilePost($uploadfile, $x_vendor_code, $x_photo_number)
     {
@@ -4480,13 +4480,13 @@ class _Api
      * @param  string $x_vendor_code Артикул НМ (required)
      * @param  int $x_photo_number Номер медиафайла на загрузку. &lt;b&gt;Начинать с 1&lt;/b&gt;. &lt;br&gt;Чтобы добавить фото к уже загруженным в НМ, номер медиафайла должен быть больше кол-ва загруженных в НМ медиафайлов. (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1MediaFilePostWithHttpInfo($uploadfile, $x_vendor_code, $x_photo_number)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1MediaFilePostRequest($uploadfile, $x_vendor_code, $x_photo_number);
 
         try {
@@ -4538,7 +4538,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2002',
+                        '\Wildberries\Client\Model\InlineResponse2002',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4546,7 +4546,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4592,7 +4592,7 @@ class _Api
      */
     public function contentV1MediaFilePostAsyncWithHttpInfo($uploadfile, $x_vendor_code, $x_photo_number)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1MediaFilePostRequest($uploadfile, $x_vendor_code, $x_photo_number);
 
         return $this->client
@@ -4759,11 +4759,11 @@ class _Api
      *
      * Изменение медиа контента КТ
      *
-     * @param  \Swagger\Client\Model\MediaSaveBody $body body (required)
+     * @param  \Wildberries\Client\Model\MediaSaveBody $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2002
+     * @return \Wildberries\Client\Model\InlineResponse2002
      */
     public function contentV1MediaSavePost($body)
     {
@@ -4776,15 +4776,15 @@ class _Api
      *
      * Изменение медиа контента КТ
      *
-     * @param  \Swagger\Client\Model\MediaSaveBody $body (required)
+     * @param  \Wildberries\Client\Model\MediaSaveBody $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2002, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1MediaSavePostWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1MediaSavePostRequest($body);
 
         try {
@@ -4836,7 +4836,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2002',
+                        '\Wildberries\Client\Model\InlineResponse2002',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4844,7 +4844,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4859,7 +4859,7 @@ class _Api
      *
      * Изменение медиа контента КТ
      *
-     * @param  \Swagger\Client\Model\MediaSaveBody $body (required)
+     * @param  \Wildberries\Client\Model\MediaSaveBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -4879,14 +4879,14 @@ class _Api
      *
      * Изменение медиа контента КТ
      *
-     * @param  \Swagger\Client\Model\MediaSaveBody $body (required)
+     * @param  \Wildberries\Client\Model\MediaSaveBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function contentV1MediaSavePostAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2002';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2002';
         $request = $this->contentV1MediaSavePostRequest($body);
 
         return $this->client
@@ -4929,7 +4929,7 @@ class _Api
     /**
      * Create request for operation 'contentV1MediaSavePost'
      *
-     * @param  \Swagger\Client\Model\MediaSaveBody $body (required)
+     * @param  \Wildberries\Client\Model\MediaSaveBody $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -5032,9 +5032,9 @@ class _Api
      * @param  string $name Поиск по названию категории (optional)
      * @param  int $top Количество запрашиваемых значений (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2007
+     * @return \Wildberries\Client\Model\InlineResponse2007
      */
     public function contentV1ObjectAllGet($name = null, $top = null)
     {
@@ -5050,13 +5050,13 @@ class _Api
      * @param  string $name Поиск по названию категории (optional)
      * @param  int $top Количество запрашиваемых значений (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2007, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2007, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1ObjectAllGetWithHttpInfo($name = null, $top = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2007';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2007';
         $request = $this->contentV1ObjectAllGetRequest($name, $top);
 
         try {
@@ -5108,7 +5108,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2007',
+                        '\Wildberries\Client\Model\InlineResponse2007',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5116,7 +5116,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5124,7 +5124,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5168,7 +5168,7 @@ class _Api
      */
     public function contentV1ObjectAllGetAsyncWithHttpInfo($name = null, $top = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2007';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2007';
         $request = $this->contentV1ObjectAllGetRequest($name, $top);
 
         return $this->client
@@ -5313,9 +5313,9 @@ class _Api
      *
      * @param  string $name Поиск по родительской категории. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2009
+     * @return \Wildberries\Client\Model\InlineResponse2009
      */
     public function contentV1ObjectCharacteristicsListFilterGet($name = null)
     {
@@ -5330,13 +5330,13 @@ class _Api
      *
      * @param  string $name Поиск по родительской категории. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2009, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2009, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1ObjectCharacteristicsListFilterGetWithHttpInfo($name = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2009';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2009';
         $request = $this->contentV1ObjectCharacteristicsListFilterGetRequest($name);
 
         try {
@@ -5388,7 +5388,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2009',
+                        '\Wildberries\Client\Model\InlineResponse2009',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5396,7 +5396,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5404,7 +5404,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5446,7 +5446,7 @@ class _Api
      */
     public function contentV1ObjectCharacteristicsListFilterGetAsyncWithHttpInfo($name = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2009';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2009';
         $request = $this->contentV1ObjectCharacteristicsListFilterGetRequest($name);
 
         return $this->client
@@ -5586,9 +5586,9 @@ class _Api
      *
      * @param  string $object_name Поиск по наименованию категории (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20010
+     * @return \Wildberries\Client\Model\InlineResponse20010
      */
     public function contentV1ObjectCharacteristicsObjectNameGet($object_name)
     {
@@ -5603,13 +5603,13 @@ class _Api
      *
      * @param  string $object_name Поиск по наименованию категории (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20010, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20010, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1ObjectCharacteristicsObjectNameGetWithHttpInfo($object_name)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20010';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20010';
         $request = $this->contentV1ObjectCharacteristicsObjectNameGetRequest($object_name);
 
         try {
@@ -5661,7 +5661,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20010',
+                        '\Wildberries\Client\Model\InlineResponse20010',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5669,7 +5669,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5677,7 +5677,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5719,7 +5719,7 @@ class _Api
      */
     public function contentV1ObjectCharacteristicsObjectNameGetAsyncWithHttpInfo($object_name)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20010';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20010';
         $request = $this->contentV1ObjectCharacteristicsObjectNameGetRequest($object_name);
 
         return $this->client
@@ -5868,9 +5868,9 @@ class _Api
      * Родительские категории товаров
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse2008
+     * @return \Wildberries\Client\Model\InlineResponse2008
      */
     public function contentV1ObjectParentAllGet()
     {
@@ -5884,13 +5884,13 @@ class _Api
      * Родительские категории товаров
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse2008, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse2008, HTTP status code, HTTP response headers (array of strings)
      */
     public function contentV1ObjectParentAllGetWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2008';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2008';
         $request = $this->contentV1ObjectParentAllGetRequest();
 
         try {
@@ -5942,7 +5942,7 @@ class _Api
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse2008',
+                        '\Wildberries\Client\Model\InlineResponse2008',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5950,7 +5950,7 @@ class _Api
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError400',
+                        '\Wildberries\Client\Model\ResponseBodyError400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5958,7 +5958,7 @@ class _Api
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyError403',
+                        '\Wildberries\Client\Model\ResponseBodyError403',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5998,7 +5998,7 @@ class _Api
      */
     public function contentV1ObjectParentAllGetAsyncWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse2008';
+        $returnType = '\Wildberries\Client\Model\InlineResponse2008';
         $request = $this->contentV1ObjectParentAllGetRequest();
 
         return $this->client
@@ -6133,7 +6133,7 @@ class _Api
      *
      * @param  int[] $body Перечень номенклатур к отмене скидок (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return string
      */
@@ -6150,7 +6150,7 @@ class _Api
      *
      * @param  int[] $body Перечень номенклатур к отмене скидок (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of string, HTTP status code, HTTP response headers (array of strings)
      */
@@ -6395,7 +6395,7 @@ class _Api
      *
      * @param  int[] $body Перечень номенклатур к отмене промокодов (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return string
      */
@@ -6412,7 +6412,7 @@ class _Api
      *
      * @param  int[] $body Перечень номенклатур к отмене промокодов (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of string, HTTP status code, HTTP response headers (array of strings)
      */
@@ -6658,7 +6658,7 @@ class _Api
      * @param  object[] $body Перечень номенклатур (required)
      * @param  string $activate_from Дата активации скидки в формате &#x60;YYYY-MM-DD&#x60; или &#x60;YYYY-MM-DD HH:MM:SS&#x60;. Если не указывать, скидка начнет действовать сразу. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return string
      */
@@ -6676,7 +6676,7 @@ class _Api
      * @param  object[] $body Перечень номенклатур (required)
      * @param  string $activate_from Дата активации скидки в формате &#x60;YYYY-MM-DD&#x60; или &#x60;YYYY-MM-DD HH:MM:SS&#x60;. Если не указывать, скидка начнет действовать сразу. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of string, HTTP status code, HTTP response headers (array of strings)
      */
@@ -6929,7 +6929,7 @@ class _Api
      * @param  object[] $body Перечень номенклатур (required)
      * @param  string $activate_from Дата активации промокада в формате YYYY-MM-DD или YYYY-MM-DD HH:MM:SS. Если не указывать, промокод начнет действовать сразу (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return string
      */
@@ -6947,7 +6947,7 @@ class _Api
      * @param  object[] $body Перечень номенклатур (required)
      * @param  string $activate_from Дата активации промокада в формате YYYY-MM-DD или YYYY-MM-DD HH:MM:SS. Если не указывать, промокод начнет действовать сразу (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of string, HTTP status code, HTTP response headers (array of strings)
      */

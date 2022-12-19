@@ -4,28 +4,28 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @package  Wildberries\Client
+ * @author   Wildberries Codegen team
+ * @link     https://github.com/Wildberries-api/Wildberries-codegen
  */
 
 /**
  * API продавца
  *
- * # Общее описание <style> .version {   border: 0.1rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #32329FE6;   height: 25px;   width: 150px;   text-align: center }, </style> <style> .warning {   border: 1.6rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #247706;   text-align: center } </style>  Wildberries API предоставляет продавцам возможность управления магазином и получения оперативной и статистической информации по протоколу HTTP RestAPI. <br> Описание API предоставляется в формате [Swagger](https://swagger.io/) (Open API) и может быть использовано для импорта в другие инструменты (такие как PostMan) или генерации клиентского кода на различных языках программирования с помощью [Swagger CodeGen](https://swagger.io/tools/swagger-codegen/)  <ul> <li> Описание в оригинальном swagger-формате <a href=\"/swagger\">swagger</a> <li> OpenAPI-файл <a href=\"/swagger.yaml\">swagger.yaml</a> </ul>  <br> Для ручной проверки API вы можете использовать: <ul> <li> Под ОС Windows - [PostMan](https://www.postman.com/) <li> Под ОС Linux - [curl](https://curl.se/)  </ul>  ## Поддержка <br> Техническая поддержка осуществляется через обращения в личном кабинете продавца. При создании нового обращения в техподдержку используйте категорию API. <br> Новости и изменения, касающиеся API, публикуются в [новостной ленте Wildberries](https://seller.wildberries.ru/news). <br> Также готовятся к публикации Release Notes по API на сайте.  После их выхода будет сделан соответствующий анонс.   ## Авторизация Вызов любого метода API должен быть авторизован.  Авторизация осуществляется по ключам API, которые  владелец личного кабинета (главный пользователь) самостоятельно  генерирует в разделе   [Профиль --> Настройки --> Доступ к API](https://seller.wildberries.ru/supplier-settings/access-to-api) для статистики   и [Профиль --> Настройки --> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api) для остальных методов.   <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a> управление всеми ключами будет перенесено в единую вкладку. </p>  ### Авторизация для методов Статистики При работе с методами Статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к API\". <br>Созданный ключ отображается в личном кабинете как \"Ключ для работы с API статистики x64\". <br>Его следует скопировать и добавлять в каждый запрос, прибавляя к запросу параметр `key`. <br>Выглядеть запрос будет примерно так: `https://suppliers-stats.wildberries.ru/api/v1/supplier/stocks?dateFrom=2022-03-25&key=.........`  <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: <ul>   <li>Управление всеми ключами будет перенесено в единую вкладку   <li>Для доступа к API Статистики нужно будет указывать домен <code><b>https://statistics-api.wildberries.ru</b></code>   <li>Ключ авторизации необходимо будет указывать в HTTP-заголовке <code>Authorization</code>, а не в строке параметров </ul> </p>  ### Авторизация для нестатистических методов При работе со всеми методами кроме статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к новому API\". <br>Обратите внимание, что ключ отображается ТОЛЬКО в момент создания. Его надо сохранить, потому что больше его отобразить будет нельзя. <br>Созданный ключ следует добавлять в каждый запрос, прибавляя к запросу заголовок (http-header) формата `Authorization: .........`. <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: данный раздел ЛК можно будет использовать для управления всеми типами ключей. </p>  ## Форматы ### Дата и время Во всех методах API статистики дата и время передаются в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339).  <br> В большинстве случаев вы можете передать дату или дату со временем. Если время не указано, оно принимается равным 00:00:00. Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает часовой пояс UTC. При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br> Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>  ## АНОНС - Единый ЛК управления ключами API WILDBERRIES начинает постепенный перевод аккаунтов на новую (единую) схему управления токенами («ключами») публичного API продавцов.  <br> <br> **ВАЖНО** : описанные ниже изменения будут становиться доступными для продавцов постепенно в течение ноября 2022г. Если изменения уже стали доступны, в настройках магазина из-под аккаунта Владельца останется одна вкладка `Доступ в новому API` вместо двух.  <br> <br> Теперь управление **всеми** ключами программного доступа к магазину будет осуществляться в интерфейсе, доступном по адресу [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api). <br> Для создаваемых ключей теперь указывается `Тип ключа`, который определяет, к какой группе сервисов данный ключ имеет доступ.  На данный момент доступно два типа, список будет расширяться: <ul> <li> `Стандартный`: дает доступ к методам API Контент, Маркетплейс, Цены и Скидки. <li> `Статистика`: дает доступ только к отчетам по статистике </ul> <br> Также при создании ключа необходимо указать его Имя - произвольную строку, которая будет  выводиться в списке ключей в качестве подсказки. Пример: \"Для онлайн бухгалтерии\"  ### Информация для пользователей API статистики  Предыдущие версии ключей (так называемые `Ключ для работы с API статистики x64`) продолжат работать в прежнем режиме. По завершении перевода всех аккаунтов на новую схему сообщим об этом отдельной новостью, где также укажем дату, до которой будут поддерживаться старые токены «x32» и «x64» (ориентировочно до середины января). <br> <br>С 29 ноября новые аккаунты будут создаваться сразу с новой схемой управления токенами. <br> Чтобы перейти со старого ключа на новый, следуйте инструкции: 1. Сгенерируйте новый ключ в разделе [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api).    <br><b>Важно</b>: при генерации выберите тип ключа `Статистика` 2. Новый ключ следует указывать в HTTP-заголовке `Authorization`.    <br>Его не надо указывать в самом запросе как раньше (так называемых query parameters),    то есть параметр `&key=...` следует удалить из запроса 3. При обращении за статистикой необходимо сменить адрес (endpoint) с https://suppliers-stats.wildberries.ru/ на https://statistics-api.wildberries.ru/   ## Release Notes  #### 2022.10.31 v1.4  Метод будет отключен 2022.10.31 в v1.4: <ul> <li> `/content/v1/cards/list` </ul>  #### 2022.09.20 v1.2  В связи с переходом на новое API Контента старые методы будут отключены. К их числу относятся: <ul> <li> `/card/_*` <li> `/api/v1/config/_*` <li> `/api/v1/directory/_*` </ul> Данные методы теперь возвращают код 404.  Новое API Контента описано в данном документе в разделах Контент / *
+ * # Общее описание <style> .version {   border: 0.1rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #32329FE6;   height: 25px;   width: 150px;   text-align: center }, </style> <style> .warning {   border: 1.6rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #247706;   text-align: center } </style>  Wildberries API предоставляет продавцам возможность управления магазином и получения оперативной и статистической информации по протоколу HTTP RestAPI. <br> Описание API предоставляется в формате [Wildberries](https://Wildberries.io/) (Open API) и может быть использовано для импорта в другие инструменты (такие как PostMan) или генерации клиентского кода на различных языках программирования с помощью [Wildberries CodeGen](https://Wildberries.io/tools/Wildberries-codegen/)  <ul> <li> Описание в оригинальном Wildberries-формате <a href=\"/Wildberries\">Wildberries</a> <li> OpenAPI-файл <a href=\"/Wildberries.yaml\">Wildberries.yaml</a> </ul>  <br> Для ручной проверки API вы можете использовать: <ul> <li> Под ОС Windows - [PostMan](https://www.postman.com/) <li> Под ОС Linux - [curl](https://curl.se/)  </ul>  ## Поддержка <br> Техническая поддержка осуществляется через обращения в личном кабинете продавца. При создании нового обращения в техподдержку используйте категорию API. <br> Новости и изменения, касающиеся API, публикуются в [новостной ленте Wildberries](https://seller.wildberries.ru/news). <br> Также готовятся к публикации Release Notes по API на сайте.  После их выхода будет сделан соответствующий анонс.   ## Авторизация Вызов любого метода API должен быть авторизован.  Авторизация осуществляется по ключам API, которые  владелец личного кабинета (главный пользователь) самостоятельно  генерирует в разделе   [Профиль --> Настройки --> Доступ к API](https://seller.wildberries.ru/supplier-settings/access-to-api) для статистики   и [Профиль --> Настройки --> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api) для остальных методов.   <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a> управление всеми ключами будет перенесено в единую вкладку. </p>  ### Авторизация для методов Статистики При работе с методами Статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к API\". <br>Созданный ключ отображается в личном кабинете как \"Ключ для работы с API статистики x64\". <br>Его следует скопировать и добавлять в каждый запрос, прибавляя к запросу параметр `key`. <br>Выглядеть запрос будет примерно так: `https://suppliers-stats.wildberries.ru/api/v1/supplier/stocks?dateFrom=2022-03-25&key=.........`  <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: <ul>   <li>Управление всеми ключами будет перенесено в единую вкладку   <li>Для доступа к API Статистики нужно будет указывать домен <code><b>https://statistics-api.wildberries.ru</b></code>   <li>Ключ авторизации необходимо будет указывать в HTTP-заголовке <code>Authorization</code>, а не в строке параметров </ul> </p>  ### Авторизация для нестатистических методов При работе со всеми методами кроме статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к новому API\". <br>Обратите внимание, что ключ отображается ТОЛЬКО в момент создания. Его надо сохранить, потому что больше его отобразить будет нельзя. <br>Созданный ключ следует добавлять в каждый запрос, прибавляя к запросу заголовок (http-header) формата `Authorization: .........`. <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: данный раздел ЛК можно будет использовать для управления всеми типами ключей. </p>  ## Форматы ### Дата и время Во всех методах API статистики дата и время передаются в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339).  <br> В большинстве случаев вы можете передать дату или дату со временем. Если время не указано, оно принимается равным 00:00:00. Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает часовой пояс UTC. При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br> Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>  ## АНОНС - Единый ЛК управления ключами API WILDBERRIES начинает постепенный перевод аккаунтов на новую (единую) схему управления токенами («ключами») публичного API продавцов.  <br> <br> **ВАЖНО** : описанные ниже изменения будут становиться доступными для продавцов постепенно в течение ноября 2022г. Если изменения уже стали доступны, в настройках магазина из-под аккаунта Владельца останется одна вкладка `Доступ в новому API` вместо двух.  <br> <br> Теперь управление **всеми** ключами программного доступа к магазину будет осуществляться в интерфейсе, доступном по адресу [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api). <br> Для создаваемых ключей теперь указывается `Тип ключа`, который определяет, к какой группе сервисов данный ключ имеет доступ.  На данный момент доступно два типа, список будет расширяться: <ul> <li> `Стандартный`: дает доступ к методам API Контент, Маркетплейс, Цены и Скидки. <li> `Статистика`: дает доступ только к отчетам по статистике </ul> <br> Также при создании ключа необходимо указать его Имя - произвольную строку, которая будет  выводиться в списке ключей в качестве подсказки. Пример: \"Для онлайн бухгалтерии\"  ### Информация для пользователей API статистики  Предыдущие версии ключей (так называемые `Ключ для работы с API статистики x64`) продолжат работать в прежнем режиме. По завершении перевода всех аккаунтов на новую схему сообщим об этом отдельной новостью, где также укажем дату, до которой будут поддерживаться старые токены «x32» и «x64» (ориентировочно до середины января). <br> <br>С 29 ноября новые аккаунты будут создаваться сразу с новой схемой управления токенами. <br> Чтобы перейти со старого ключа на новый, следуйте инструкции: 1. Сгенерируйте новый ключ в разделе [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api).    <br><b>Важно</b>: при генерации выберите тип ключа `Статистика` 2. Новый ключ следует указывать в HTTP-заголовке `Authorization`.    <br>Его не надо указывать в самом запросе как раньше (так называемых query parameters),    то есть параметр `&key=...` следует удалить из запроса 3. При обращении за статистикой необходимо сменить адрес (endpoint) с https://suppliers-stats.wildberries.ru/ на https://statistics-api.wildberries.ru/   ## Release Notes  #### 2022.10.31 v1.4  Метод будет отключен 2022.10.31 в v1.4: <ul> <li> `/content/v1/cards/list` </ul>  #### 2022.09.20 v1.2  В связи с переходом на новое API Контента старые методы будут отключены. К их числу относятся: <ul> <li> `/card/_*` <li> `/api/v1/config/_*` <li> `/api/v1/directory/_*` </ul> Данные методы теперь возвращают код 404.  Новое API Контента описано в данном документе в разделах Контент / *
  *
  * OpenAPI spec version: 1.4
  * 
- * Generated by: https://github.com/swagger-api/swagger-codegen.git
- * Swagger Codegen version: 3.0.36
+ * Generated by: https://github.com/Wildberries-api/Wildberries-codegen.git
+ * Wildberries Codegen version: 3.0.36
  */
 /**
- * NOTE: This class is auto generated by the swagger code generator program.
- * https://github.com/swagger-api/swagger-codegen
+ * NOTE: This class is auto generated by the Wildberries code generator program.
+ * https://github.com/Wildberries-api/Wildberries-codegen
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Wildberries\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,18 +33,18 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Wildberries\Client\ApiException;
+use Wildberries\Client\Configuration;
+use Wildberries\Client\HeaderSelector;
+use Wildberries\Client\ObjectSerializer;
 
 /**
  * MarketplaceDeprecatedApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @package  Wildberries\Client
+ * @author   Wildberries Codegen team
+ * @link     https://github.com/Wildberries-api/Wildberries-codegen
  */
 class MarketplaceDeprecatedApi
 {
@@ -98,9 +98,9 @@ class MarketplaceDeprecatedApi
      * @param  int $status Статус заказа. (optional)
      * @param  int $id Идентификатор сборочного задания, если нужно получить данные по определенному заказу. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20027
+     * @return \Wildberries\Client\Model\InlineResponse20027
      */
     public function apiV2OrdersGet($date_start, $skip, $take, $date_end = null, $status = null, $id = null)
     {
@@ -120,13 +120,13 @@ class MarketplaceDeprecatedApi
      * @param  int $status Статус заказа. (optional)
      * @param  int $id Идентификатор сборочного задания, если нужно получить данные по определенному заказу. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20027, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20027, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2OrdersGetWithHttpInfo($date_start, $skip, $take, $date_end = null, $status = null, $id = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20027';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20027';
         $request = $this->apiV2OrdersGetRequest($date_start, $skip, $take, $date_end, $status, $id);
 
         try {
@@ -178,7 +178,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20027',
+                        '\Wildberries\Client\Model\InlineResponse20027',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -230,7 +230,7 @@ class MarketplaceDeprecatedApi
      */
     public function apiV2OrdersGetAsyncWithHttpInfo($date_start, $skip, $take, $date_end = null, $status = null, $id = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20027';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20027';
         $request = $this->apiV2OrdersGetRequest($date_start, $skip, $take, $date_end, $status, $id);
 
         return $this->client
@@ -411,9 +411,9 @@ class MarketplaceDeprecatedApi
      *
      * Обновление статуса сборочных заданий
      *
-     * @param  \Swagger\Client\Model\V2OrdersBody[] $body body (optional)
+     * @param  \Wildberries\Client\Model\V2OrdersBody[] $body body (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -427,9 +427,9 @@ class MarketplaceDeprecatedApi
      *
      * Обновление статуса сборочных заданий
      *
-     * @param  \Swagger\Client\Model\V2OrdersBody[] $body (optional)
+     * @param  \Wildberries\Client\Model\V2OrdersBody[] $body (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -473,7 +473,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse4001',
+                        '\Wildberries\Client\Model\InlineResponse4001',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -488,7 +488,7 @@ class MarketplaceDeprecatedApi
      *
      * Обновление статуса сборочных заданий
      *
-     * @param  \Swagger\Client\Model\V2OrdersBody[] $body (optional)
+     * @param  \Wildberries\Client\Model\V2OrdersBody[] $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -508,7 +508,7 @@ class MarketplaceDeprecatedApi
      *
      * Обновление статуса сборочных заданий
      *
-     * @param  \Swagger\Client\Model\V2OrdersBody[] $body (optional)
+     * @param  \Wildberries\Client\Model\V2OrdersBody[] $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -544,7 +544,7 @@ class MarketplaceDeprecatedApi
     /**
      * Create request for operation 'apiV2OrdersPut'
      *
-     * @param  \Swagger\Client\Model\V2OrdersBody[] $body (optional)
+     * @param  \Wildberries\Client\Model\V2OrdersBody[] $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -638,11 +638,11 @@ class MarketplaceDeprecatedApi
      *
      * Cписок QR стикеров в формате pdf
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body body (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20029
+     * @return \Wildberries\Client\Model\InlineResponse20029
      */
     public function apiV2OrdersStickersPdfPost($body = null)
     {
@@ -655,15 +655,15 @@ class MarketplaceDeprecatedApi
      *
      * Cписок QR стикеров в формате pdf
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20029, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20029, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2OrdersStickersPdfPostWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20029';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20029';
         $request = $this->apiV2OrdersStickersPdfPostRequest($body);
 
         try {
@@ -715,7 +715,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20029',
+                        '\Wildberries\Client\Model\InlineResponse20029',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -723,7 +723,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyStickersError',
+                        '\Wildberries\Client\Model\ResponseBodyStickersError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -738,7 +738,7 @@ class MarketplaceDeprecatedApi
      *
      * Cписок QR стикеров в формате pdf
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -758,14 +758,14 @@ class MarketplaceDeprecatedApi
      *
      * Cписок QR стикеров в формате pdf
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function apiV2OrdersStickersPdfPostAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20029';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20029';
         $request = $this->apiV2OrdersStickersPdfPostRequest($body);
 
         return $this->client
@@ -808,7 +808,7 @@ class MarketplaceDeprecatedApi
     /**
      * Create request for operation 'apiV2OrdersStickersPdfPost'
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -902,11 +902,11 @@ class MarketplaceDeprecatedApi
      *
      * Cписок этикеток сборочных заданий
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body body (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20028
+     * @return \Wildberries\Client\Model\InlineResponse20028
      */
     public function apiV2OrdersStickersPost($body = null)
     {
@@ -919,15 +919,15 @@ class MarketplaceDeprecatedApi
      *
      * Cписок этикеток сборочных заданий
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20028, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20028, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2OrdersStickersPostWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20028';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20028';
         $request = $this->apiV2OrdersStickersPostRequest($body);
 
         try {
@@ -979,7 +979,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20028',
+                        '\Wildberries\Client\Model\InlineResponse20028',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -987,7 +987,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ResponseBodyStickersError',
+                        '\Wildberries\Client\Model\ResponseBodyStickersError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1002,7 +1002,7 @@ class MarketplaceDeprecatedApi
      *
      * Cписок этикеток сборочных заданий
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1022,14 +1022,14 @@ class MarketplaceDeprecatedApi
      *
      * Cписок этикеток сборочных заданий
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function apiV2OrdersStickersPostAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20028';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20028';
         $request = $this->apiV2OrdersStickersPostRequest($body);
 
         return $this->client
@@ -1072,7 +1072,7 @@ class MarketplaceDeprecatedApi
     /**
      * Create request for operation 'apiV2OrdersStickersPost'
      *
-     * @param  \Swagger\Client\Model\RequestBodyStickers $body (optional)
+     * @param  \Wildberries\Client\Model\RequestBodyStickers $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1166,11 +1166,11 @@ class MarketplaceDeprecatedApi
      *
      * Удаление остатков товара
      *
-     * @param  \Swagger\Client\Model\V2StocksBody1[] $body body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody1[] $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20025
+     * @return \Wildberries\Client\Model\InlineResponse20025
      */
     public function apiV2StocksDelete($body)
     {
@@ -1183,15 +1183,15 @@ class MarketplaceDeprecatedApi
      *
      * Удаление остатков товара
      *
-     * @param  \Swagger\Client\Model\V2StocksBody1[] $body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody1[] $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20025, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20025, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2StocksDeleteWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20025';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20025';
         $request = $this->apiV2StocksDeleteRequest($body);
 
         try {
@@ -1243,7 +1243,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20025',
+                        '\Wildberries\Client\Model\InlineResponse20025',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1251,7 +1251,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\RespBodyStocks',
+                        '\Wildberries\Client\Model\RespBodyStocks',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1266,7 +1266,7 @@ class MarketplaceDeprecatedApi
      *
      * Удаление остатков товара
      *
-     * @param  \Swagger\Client\Model\V2StocksBody1[] $body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody1[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1286,14 +1286,14 @@ class MarketplaceDeprecatedApi
      *
      * Удаление остатков товара
      *
-     * @param  \Swagger\Client\Model\V2StocksBody1[] $body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody1[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function apiV2StocksDeleteAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20025';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20025';
         $request = $this->apiV2StocksDeleteRequest($body);
 
         return $this->client
@@ -1336,7 +1336,7 @@ class MarketplaceDeprecatedApi
     /**
      * Create request for operation 'apiV2StocksDelete'
      *
-     * @param  \Swagger\Client\Model\V2StocksBody1[] $body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody1[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1440,9 +1440,9 @@ class MarketplaceDeprecatedApi
      * @param  int $take Сколько записей выдать (для пагинации). (required)
      * @param  string $search Поиск по всем полям таблицы. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20023
+     * @return \Wildberries\Client\Model\InlineResponse20023
      */
     public function apiV2StocksGet($skip, $take, $search = null)
     {
@@ -1459,13 +1459,13 @@ class MarketplaceDeprecatedApi
      * @param  int $take Сколько записей выдать (для пагинации). (required)
      * @param  string $search Поиск по всем полям таблицы. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20023, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20023, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2StocksGetWithHttpInfo($skip, $take, $search = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20023';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20023';
         $request = $this->apiV2StocksGetRequest($skip, $take, $search);
 
         try {
@@ -1517,7 +1517,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20023',
+                        '\Wildberries\Client\Model\InlineResponse20023',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1563,7 +1563,7 @@ class MarketplaceDeprecatedApi
      */
     public function apiV2StocksGetAsyncWithHttpInfo($skip, $take, $search = null)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20023';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20023';
         $request = $this->apiV2StocksGetRequest($skip, $take, $search);
 
         return $this->client
@@ -1723,11 +1723,11 @@ class MarketplaceDeprecatedApi
      *
      * Обновление остатков товара
      *
-     * @param  \Swagger\Client\Model\V2StocksBody[] $body body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody[] $body body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20024
+     * @return \Wildberries\Client\Model\InlineResponse20024
      */
     public function apiV2StocksPost($body)
     {
@@ -1740,15 +1740,15 @@ class MarketplaceDeprecatedApi
      *
      * Обновление остатков товара
      *
-     * @param  \Swagger\Client\Model\V2StocksBody[] $body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody[] $body (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20024, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20024, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2StocksPostWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20024';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20024';
         $request = $this->apiV2StocksPostRequest($body);
 
         try {
@@ -1800,7 +1800,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20024',
+                        '\Wildberries\Client\Model\InlineResponse20024',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1815,7 +1815,7 @@ class MarketplaceDeprecatedApi
      *
      * Обновление остатков товара
      *
-     * @param  \Swagger\Client\Model\V2StocksBody[] $body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1835,14 +1835,14 @@ class MarketplaceDeprecatedApi
      *
      * Обновление остатков товара
      *
-     * @param  \Swagger\Client\Model\V2StocksBody[] $body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function apiV2StocksPostAsyncWithHttpInfo($body)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20024';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20024';
         $request = $this->apiV2StocksPostRequest($body);
 
         return $this->client
@@ -1885,7 +1885,7 @@ class MarketplaceDeprecatedApi
     /**
      * Create request for operation 'apiV2StocksPost'
      *
-     * @param  \Swagger\Client\Model\V2StocksBody[] $body (required)
+     * @param  \Wildberries\Client\Model\V2StocksBody[] $body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1987,9 +1987,9 @@ class MarketplaceDeprecatedApi
      *
      * @param  string $status &#x60;ACTIVE&#x60; - активные поставки, &#x60;ON_DELIVERY&#x60; - поставки в пути (которые ещё не приняты на складе). (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20020
+     * @return \Wildberries\Client\Model\InlineResponse20020
      */
     public function apiV2SuppliesGet($status)
     {
@@ -2004,13 +2004,13 @@ class MarketplaceDeprecatedApi
      *
      * @param  string $status &#x60;ACTIVE&#x60; - активные поставки, &#x60;ON_DELIVERY&#x60; - поставки в пути (которые ещё не приняты на складе). (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20020, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20020, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2SuppliesGetWithHttpInfo($status)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20020';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20020';
         $request = $this->apiV2SuppliesGetRequest($status);
 
         try {
@@ -2062,7 +2062,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20020',
+                        '\Wildberries\Client\Model\InlineResponse20020',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2070,7 +2070,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse400',
+                        '\Wildberries\Client\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2112,7 +2112,7 @@ class MarketplaceDeprecatedApi
      */
     public function apiV2SuppliesGetAsyncWithHttpInfo($status)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20020';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20020';
         $request = $this->apiV2SuppliesGetRequest($status);
 
         return $this->client
@@ -2259,9 +2259,9 @@ class MarketplaceDeprecatedApi
      * @param  string $type Формат штрихкода. (required)
      * @param  string $id Идентификатор поставки. (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20021
+     * @return \Wildberries\Client\Model\InlineResponse20021
      */
     public function apiV2SuppliesIdBarcodeGet($type, $id)
     {
@@ -2277,13 +2277,13 @@ class MarketplaceDeprecatedApi
      * @param  string $type Формат штрихкода. (required)
      * @param  string $id Идентификатор поставки. (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20021, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20021, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2SuppliesIdBarcodeGetWithHttpInfo($type, $id)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20021';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20021';
         $request = $this->apiV2SuppliesIdBarcodeGetRequest($type, $id);
 
         try {
@@ -2335,7 +2335,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20021',
+                        '\Wildberries\Client\Model\InlineResponse20021',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2343,7 +2343,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2351,7 +2351,7 @@ class MarketplaceDeprecatedApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2395,7 +2395,7 @@ class MarketplaceDeprecatedApi
      */
     public function apiV2SuppliesIdBarcodeGetAsyncWithHttpInfo($type, $id)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20021';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20021';
         $request = $this->apiV2SuppliesIdBarcodeGetRequest($type, $id);
 
         return $this->client
@@ -2556,7 +2556,7 @@ class MarketplaceDeprecatedApi
      *
      * @param  string $id Идентификатор поставки. (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -2572,7 +2572,7 @@ class MarketplaceDeprecatedApi
      *
      * @param  string $id Идентификатор поставки. (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -2616,7 +2616,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2624,7 +2624,7 @@ class MarketplaceDeprecatedApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2632,7 +2632,7 @@ class MarketplaceDeprecatedApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2810,9 +2810,9 @@ class MarketplaceDeprecatedApi
      *
      * @param  string $id Идентификатор поставки. (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse20022
+     * @return \Wildberries\Client\Model\InlineResponse20022
      */
     public function apiV2SuppliesIdOrdersGet($id)
     {
@@ -2827,13 +2827,13 @@ class MarketplaceDeprecatedApi
      *
      * @param  string $id Идентификатор поставки. (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse20022, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse20022, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2SuppliesIdOrdersGetWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20022';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20022';
         $request = $this->apiV2SuppliesIdOrdersGetRequest($id);
 
         try {
@@ -2885,7 +2885,7 @@ class MarketplaceDeprecatedApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse20022',
+                        '\Wildberries\Client\Model\InlineResponse20022',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2893,7 +2893,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2901,7 +2901,7 @@ class MarketplaceDeprecatedApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2943,7 +2943,7 @@ class MarketplaceDeprecatedApi
      */
     public function apiV2SuppliesIdOrdersGetAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse20022';
+        $returnType = '\Wildberries\Client\Model\InlineResponse20022';
         $request = $this->apiV2SuppliesIdOrdersGetRequest($id);
 
         return $this->client
@@ -3092,9 +3092,9 @@ class MarketplaceDeprecatedApi
      * Добавление к поставке заказов
      *
      * @param  string $id Идентификатор поставки. (required)
-     * @param  \Swagger\Client\Model\SuppliesIdBody $body body (optional)
+     * @param  \Wildberries\Client\Model\SuppliesIdBody $body body (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -3109,9 +3109,9 @@ class MarketplaceDeprecatedApi
      * Добавление к поставке заказов
      *
      * @param  string $id Идентификатор поставки. (required)
-     * @param  \Swagger\Client\Model\SuppliesIdBody $body (optional)
+     * @param  \Wildberries\Client\Model\SuppliesIdBody $body (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -3155,7 +3155,7 @@ class MarketplaceDeprecatedApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3163,7 +3163,7 @@ class MarketplaceDeprecatedApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3171,7 +3171,7 @@ class MarketplaceDeprecatedApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\SuppliesIdRespBody2',
+                        '\Wildberries\Client\Model\SuppliesIdRespBody2',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3187,7 +3187,7 @@ class MarketplaceDeprecatedApi
      * Добавление к поставке заказов
      *
      * @param  string $id Идентификатор поставки. (required)
-     * @param  \Swagger\Client\Model\SuppliesIdBody $body (optional)
+     * @param  \Wildberries\Client\Model\SuppliesIdBody $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -3208,7 +3208,7 @@ class MarketplaceDeprecatedApi
      * Добавление к поставке заказов
      *
      * @param  string $id Идентификатор поставки. (required)
-     * @param  \Swagger\Client\Model\SuppliesIdBody $body (optional)
+     * @param  \Wildberries\Client\Model\SuppliesIdBody $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -3245,7 +3245,7 @@ class MarketplaceDeprecatedApi
      * Create request for operation 'apiV2SuppliesIdPut'
      *
      * @param  string $id Идентификатор поставки. (required)
-     * @param  \Swagger\Client\Model\SuppliesIdBody $body (optional)
+     * @param  \Wildberries\Client\Model\SuppliesIdBody $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -3354,9 +3354,9 @@ class MarketplaceDeprecatedApi
      * Новая поставка
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InlineResponse201
+     * @return \Wildberries\Client\Model\InlineResponse201
      */
     public function apiV2SuppliesPost()
     {
@@ -3370,13 +3370,13 @@ class MarketplaceDeprecatedApi
      * Новая поставка
      *
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InlineResponse201, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wildberries\Client\Model\InlineResponse201, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2SuppliesPostWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse201';
+        $returnType = '\Wildberries\Client\Model\InlineResponse201';
         $request = $this->apiV2SuppliesPostRequest();
 
         try {
@@ -3428,7 +3428,7 @@ class MarketplaceDeprecatedApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse201',
+                        '\Wildberries\Client\Model\InlineResponse201',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3436,7 +3436,7 @@ class MarketplaceDeprecatedApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InlineResponse409',
+                        '\Wildberries\Client\Model\InlineResponse409',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3476,7 +3476,7 @@ class MarketplaceDeprecatedApi
      */
     public function apiV2SuppliesPostAsyncWithHttpInfo()
     {
-        $returnType = '\Swagger\Client\Model\InlineResponse201';
+        $returnType = '\Wildberries\Client\Model\InlineResponse201';
         $request = $this->apiV2SuppliesPostRequest();
 
         return $this->client

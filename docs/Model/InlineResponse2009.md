@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**\Swagger\Client\Model\InlineResponse2009Data[]**](InlineResponse2009Data.md) |  | [optional] 
+**data** | [**\Wildberries\Client\Model\InlineResponse2009Data[]**](InlineResponse2009Data.md) |  | [optional] 
 **error** | **bool** | Флаг ошибки. | [optional] 
 **error_text** | **string** | Описание ошибки. | [optional] 
 **additional_errors** | **string** | Дополнительные ошибки. | [optional] 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **warehouse_id** | **int** | Идентификатор склада поставщика, на который поступило сборочное задание | [optional] 
 **priority_sc** | **string[]** | Массив приоритетных СЦ для доставки сборочного задания. Если поле не заполнено или массив пустой, приоритетного СЦ для данного сборочного задания нет. | [optional] 
 **offices** | **string[]** | Список офисов, куда следует привезти товар. | [optional] 
-**user** | [**\Swagger\Client\Model\OrderUser**](OrderUser.md) |  | [optional] 
+**user** | [**\Wildberries\Client\Model\OrderUser**](OrderUser.md) |  | [optional] 
 **skus** | **string[]** | Массив штрихкодов товара | [optional] 
 **price** | **int** | Цена в валюте продажи с учетом скидок в копейках. Код валюты продажи в поле currencyCode. | [optional] 
 **converted_price** | **int** | Цена продажи с учетом скидок в копейках, сконвертированная в рубли по курсу на момент создания сборочного задания. Предоставляется в информационных целях. | [optional] 

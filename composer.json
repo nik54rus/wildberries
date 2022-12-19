@@ -1,18 +1,18 @@
 {
     "name": "nik54rus/wildberries",
-    "description": "Api wildberries swagger",
+    "description": "Api wildberries Wildberries",
     "keywords": [
-        "swagger",
+        "Wildberries",
         "php",
         "sdk",
         "api"
     ],
-    "homepage": "http://swagger.io",
+    "homepage": "http://Wildberries.io",
     "license": "proprietary",
     "authors": [
         {
-            "name": "Swagger and contributors",
-            "homepage": "https://github.com/swagger-api/swagger-codegen"
+            "name": "Wildberries and contributors",
+            "homepage": "https://github.com/Wildberries-api/Wildberries-codegen"
         }
     ],
     "require": {
