@@ -1398,7 +1398,7 @@ $apiInstance = new Wildberries\Client\Api\_Api(
     $config
 );
 $body = array(new \stdClass); // object[] | Перечень номенклатур
-$activate_from = "activate_from_example"; // string | Дата активации промокада в формате YYYY-MM-DD или YYYY-MM-DD HH:MM:SS. Если не указывать, промокод начнет действовать сразу
+$activate_from = "activate_from_example"; // string | Дата активации промокада в формате `YYYY-MM-DD` или `YYYY-MM-DD HH:MM:SS`. Если не указывать, промокод начнет действовать сразу
 
 try {
     $result = $apiInstance->publicApiV1UpdatePromocodesPost($body, $activate_from);
@@ -1414,7 +1414,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**object[]**](../Model/object.md)| Перечень номенклатур |
- **activate_from** | **string**| Дата активации промокада в формате YYYY-MM-DD или YYYY-MM-DD HH:MM:SS. Если не указывать, промокод начнет действовать сразу | [optional]
+ **activate_from** | **string**| Дата активации промокада в формате &#x60;YYYY-MM-DD&#x60; или &#x60;YYYY-MM-DD HH:MM:SS&#x60;. Если не указывать, промокод начнет действовать сразу | [optional]
 
 ### Return type
 

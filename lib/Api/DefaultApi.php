@@ -12,12 +12,12 @@
 /**
  * API продавца
  *
- * # Общее описание <style> .version {   border: 0.1rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #32329FE6;   height: 25px;   width: 150px;   text-align: center }, </style> <style> .warning {   border: 1.6rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #247706;   text-align: center } </style>  Wildberries API предоставляет продавцам возможность управления магазином и получения оперативной и статистической информации по протоколу HTTP RestAPI. <br> Описание API предоставляется в формате [Wildberries](https://Wildberries.io/) (Open API) и может быть использовано для импорта в другие инструменты (такие как PostMan) или генерации клиентского кода на различных языках программирования с помощью [Wildberries CodeGen](https://Wildberries.io/tools/Wildberries-codegen/)  <ul> <li> Описание в оригинальном Wildberries-формате <a href=\"/Wildberries\">Wildberries</a> <li> OpenAPI-файл <a href=\"/Wildberries.yaml\">Wildberries.yaml</a> </ul>  <br> Для ручной проверки API вы можете использовать: <ul> <li> Под ОС Windows - [PostMan](https://www.postman.com/) <li> Под ОС Linux - [curl](https://curl.se/)  </ul>  ## Поддержка <br> Техническая поддержка осуществляется через обращения в личном кабинете продавца. При создании нового обращения в техподдержку используйте категорию API. <br> Новости и изменения, касающиеся API, публикуются в [новостной ленте Wildberries](https://seller.wildberries.ru/news). <br> Также готовятся к публикации Release Notes по API на сайте.  После их выхода будет сделан соответствующий анонс.   ## Авторизация Вызов любого метода API должен быть авторизован.  Авторизация осуществляется по ключам API, которые  владелец личного кабинета (главный пользователь) самостоятельно  генерирует в разделе   [Профиль --> Настройки --> Доступ к API](https://seller.wildberries.ru/supplier-settings/access-to-api) для статистики   и [Профиль --> Настройки --> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api) для остальных методов.   <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a> управление всеми ключами будет перенесено в единую вкладку. </p>  ### Авторизация для методов Статистики При работе с методами Статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к API\". <br>Созданный ключ отображается в личном кабинете как \"Ключ для работы с API статистики x64\". <br>Его следует скопировать и добавлять в каждый запрос, прибавляя к запросу параметр `key`. <br>Выглядеть запрос будет примерно так: `https://suppliers-stats.wildberries.ru/api/v1/supplier/stocks?dateFrom=2022-03-25&key=.........`  <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: <ul>   <li>Управление всеми ключами будет перенесено в единую вкладку   <li>Для доступа к API Статистики нужно будет указывать домен <code><b>https://statistics-api.wildberries.ru</b></code>   <li>Ключ авторизации необходимо будет указывать в HTTP-заголовке <code>Authorization</code>, а не в строке параметров </ul> </p>  ### Авторизация для нестатистических методов При работе со всеми методами кроме статистики ключ авторизации генерируется в разделе \"Профиль --> Настройки --> Доступ к новому API\". <br>Обратите внимание, что ключ отображается ТОЛЬКО в момент создания. Его надо сохранить, потому что больше его отобразить будет нельзя. <br>Созданный ключ следует добавлять в каждый запрос, прибавляя к запросу заголовок (http-header) формата `Authorization: .........`. <p> <b>ВНИМАНИЕ!</b> В соответствии с <a href=\"#section/Obshee-opisanie/ANONS-Edinyj-LK-upravleniya-klyuchami-API\">Анонсом</a>: данный раздел ЛК можно будет использовать для управления всеми типами ключей. </p>  ## Форматы ### Дата и время Во всех методах API статистики дата и время передаются в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339).  <br> В большинстве случаев вы можете передать дату или дату со временем. Если время не указано, оно принимается равным 00:00:00. Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает часовой пояс UTC. При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br> Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>  ## АНОНС - Единый ЛК управления ключами API WILDBERRIES начинает постепенный перевод аккаунтов на новую (единую) схему управления токенами («ключами») публичного API продавцов.  <br> <br> **ВАЖНО** : описанные ниже изменения будут становиться доступными для продавцов постепенно в течение ноября 2022г. Если изменения уже стали доступны, в настройках магазина из-под аккаунта Владельца останется одна вкладка `Доступ в новому API` вместо двух.  <br> <br> Теперь управление **всеми** ключами программного доступа к магазину будет осуществляться в интерфейсе, доступном по адресу [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api). <br> Для создаваемых ключей теперь указывается `Тип ключа`, который определяет, к какой группе сервисов данный ключ имеет доступ.  На данный момент доступно два типа, список будет расширяться: <ul> <li> `Стандартный`: дает доступ к методам API Контент, Маркетплейс, Цены и Скидки. <li> `Статистика`: дает доступ только к отчетам по статистике </ul> <br> Также при создании ключа необходимо указать его Имя - произвольную строку, которая будет  выводиться в списке ключей в качестве подсказки. Пример: \"Для онлайн бухгалтерии\"  ### Информация для пользователей API статистики  Предыдущие версии ключей (так называемые `Ключ для работы с API статистики x64`) продолжат работать в прежнем режиме. По завершении перевода всех аккаунтов на новую схему сообщим об этом отдельной новостью, где также укажем дату, до которой будут поддерживаться старые токены «x32» и «x64» (ориентировочно до середины января). <br> <br>С 29 ноября новые аккаунты будут создаваться сразу с новой схемой управления токенами. <br> Чтобы перейти со старого ключа на новый, следуйте инструкции: 1. Сгенерируйте новый ключ в разделе [Настройки -> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api).    <br><b>Важно</b>: при генерации выберите тип ключа `Статистика` 2. Новый ключ следует указывать в HTTP-заголовке `Authorization`.    <br>Его не надо указывать в самом запросе как раньше (так называемых query parameters),    то есть параметр `&key=...` следует удалить из запроса 3. При обращении за статистикой необходимо сменить адрес (endpoint) с https://suppliers-stats.wildberries.ru/ на https://statistics-api.wildberries.ru/   ## Release Notes  #### 2022.10.31 v1.4  Метод будет отключен 2022.10.31 в v1.4: <ul> <li> `/content/v1/cards/list` </ul>  #### 2022.09.20 v1.2  В связи с переходом на новое API Контента старые методы будут отключены. К их числу относятся: <ul> <li> `/card/_*` <li> `/api/v1/config/_*` <li> `/api/v1/directory/_*` </ul> Данные методы теперь возвращают код 404.  Новое API Контента описано в данном документе в разделах Контент / *
+ * # Общее описание <style> .version {   border: 0.1rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #32329FE6;   height: 25px;   width: 150px;   text-align: center }, </style> <style> .warning {   border: 1.6rem #b3b3b3 solid;   background-color: #F9F9F9;   color: #247706;   text-align: center } </style>  Wildberries API предоставляет продавцам возможность управления магазином и получения оперативной и статистической информации по протоколу HTTP RestAPI. <br> Описание API предоставляется в формате [Wildberries](https://Wildberries.io/) (Open API) и может быть использовано для импорта в другие инструменты (такие как PostMan) или генерации клиентского кода на различных языках программирования с помощью [Wildberries CodeGen](https://Wildberries.io/tools/Wildberries-codegen/)  <ul> <li> Описание в оригинальном Wildberries-формате <a href=\"/Wildberries\">Wildberries</a> <li> OpenAPI-файл <a href=\"/Wildberries.yaml\">Wildberries.yaml</a> </ul>  <br> Для ручной проверки API вы можете использовать: <ul> <li> Под ОС Windows - [PostMan](https://www.postman.com/) <li> Под ОС Linux - [curl](https://curl.se/)  </ul>  ## Поддержка <br> Техническая поддержка осуществляется через обращения в личном кабинете продавца. При создании нового обращения в техподдержку используйте категорию API. <br> Новости и изменения, касающиеся API, публикуются в [новостной ленте Wildberries](https://seller.wildberries.ru/news). <br> Также готовятся к публикации Release Notes по API на сайте.  После их выхода будет сделан соответствующий анонс.   ## Авторизация Авторизация осуществляется по ключам API, которые  владелец личного кабинета (главный пользователь) самостоятельно  генерирует в разделе   [Профиль --> Настройки --> Доступ к новому API](https://seller.wildberries.ru/supplier-settings/access-to-new-api). <br>Обратите внимание, что ключ отображается ТОЛЬКО в момент создания. Его надо сохранить, потому что больше его отобразить будет нельзя. <br>Созданный ключ следует добавлять в каждый запрос, прибавляя к запросу заголовок (http-header) формата `Authorization: .........`. <br> <br>Внимание! Изменился домен для методов статистики, актуальный: https://statistics-api.wildberries.ru ## Форматы ### Дата и время Во всех методах API статистики дата и время передаются в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339).  <br> В большинстве случаев вы можете передать дату или дату со временем. Если время не указано, оно принимается равным 00:00:00. Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает часовой пояс UTC. При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br> Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul> ## Release Notes    #### 2023.01.13 v1.7      Добавлено описание API рекламы  #### 2022.12.21 v1.6 Добавлена инструкция по загрузке статистики в Excel #### 2022.12.15 v1.5  Новая авторизация для методов API статистики 2022.12.15 в v1.5: #### 2022.10.31 v1.4  Метод будет отключен 2022.10.31 в v1.4: <ul> <li> `/content/v1/cards/list` </ul>  #### 2022.09.20 v1.2  В связи с переходом на новое API Контента старые методы будут отключены. К их числу относятся: <ul> <li> `/card/_*` <li> `/api/v1/config/_*` <li> `/api/v1/directory/_*` </ul> Данные методы теперь возвращают код 404.  Новое API Контента описано в данном документе в разделах Контент / *
  *
- * OpenAPI spec version: 1.4
+ * OpenAPI spec version: 1.7
  * 
  * Generated by: https://github.com/Wildberries-api/Wildberries-codegen.git
- * Wildberries Codegen version: 3.0.36
+ * Wildberries Codegen version: 3.0.37
  */
 /**
  * NOTE: This class is auto generated by the Wildberries code generator program.
@@ -87,20 +87,1787 @@ class DefaultApi
     }
 
     /**
+     * Operation advV0AdvertGet
+     *
+     * Информация о РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Wildberries\Client\Model\InlineResponse20041
+     */
+    public function advV0AdvertGet($id)
+    {
+        list($response) = $this->advV0AdvertGetWithHttpInfo($id);
+        return $response;
+    }
+
+    /**
+     * Operation advV0AdvertGetWithHttpInfo
+     *
+     * Информация о РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Wildberries\Client\Model\InlineResponse20041, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function advV0AdvertGetWithHttpInfo($id)
+    {
+        $returnType = '\Wildberries\Client\Model\InlineResponse20041';
+        $request = $this->advV0AdvertGetRequest($id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wildberries\Client\Model\InlineResponse20041',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation advV0AdvertGetAsync
+     *
+     * Информация о РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0AdvertGetAsync($id)
+    {
+        return $this->advV0AdvertGetAsyncWithHttpInfo($id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation advV0AdvertGetAsyncWithHttpInfo
+     *
+     * Информация о РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0AdvertGetAsyncWithHttpInfo($id)
+    {
+        $returnType = '\Wildberries\Client\Model\InlineResponse20041';
+        $request = $this->advV0AdvertGetRequest($id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'advV0AdvertGet'
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function advV0AdvertGetRequest($id)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling advV0AdvertGet'
+            );
+        }
+
+        $resourcePath = '/adv/v0/advert';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($id !== null) {
+            $queryParams['id'] = ObjectSerializer::toQueryValue($id, null);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation advV0AdvertsGet
+     *
+     * Список РК
+     *
+     * @param  int $status &lt;dl&gt; &lt;dt&gt;Статус РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;9&lt;/code&gt; - идут показы&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;11&lt;/code&gt; - РК на паузе&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $limit Количество кампаний в ответе (optional)
+     * @param  int $offset Смещение относительно первой РК (optional)
+     * @param  string $order &lt;dl&gt; &lt;dt&gt;Порядок:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;create&lt;/code&gt; (по времени создания РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;change&lt;/code&gt; (по времени последнего изменения РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;id&lt;/code&gt; (по идентификатору РК)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;&lt;b&gt;order&#x3D;change&lt;/b&gt;&amp;direction&#x3D;asc**&lt;/code&gt; (optional)
+     * @param  string $direction &lt;dl&gt; &lt;dt&gt;Направление:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;desc&lt;/code&gt; (от большего к меньшему)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;asc&lt;/code&gt; (от меньшего к большему)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;order&#x3D;change&amp;&lt;b&gt;direction&#x3D;asc&lt;/b&gt;**&lt;/code&gt; (optional)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Wildberries\Client\Model\InlineResponse20040[]
+     */
+    public function advV0AdvertsGet($status = null, $type = null, $limit = null, $offset = null, $order = null, $direction = null)
+    {
+        list($response) = $this->advV0AdvertsGetWithHttpInfo($status, $type, $limit, $offset, $order, $direction);
+        return $response;
+    }
+
+    /**
+     * Operation advV0AdvertsGetWithHttpInfo
+     *
+     * Список РК
+     *
+     * @param  int $status &lt;dl&gt; &lt;dt&gt;Статус РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;9&lt;/code&gt; - идут показы&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;11&lt;/code&gt; - РК на паузе&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $limit Количество кампаний в ответе (optional)
+     * @param  int $offset Смещение относительно первой РК (optional)
+     * @param  string $order &lt;dl&gt; &lt;dt&gt;Порядок:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;create&lt;/code&gt; (по времени создания РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;change&lt;/code&gt; (по времени последнего изменения РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;id&lt;/code&gt; (по идентификатору РК)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;&lt;b&gt;order&#x3D;change&lt;/b&gt;&amp;direction&#x3D;asc**&lt;/code&gt; (optional)
+     * @param  string $direction &lt;dl&gt; &lt;dt&gt;Направление:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;desc&lt;/code&gt; (от большего к меньшему)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;asc&lt;/code&gt; (от меньшего к большему)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;order&#x3D;change&amp;&lt;b&gt;direction&#x3D;asc&lt;/b&gt;**&lt;/code&gt; (optional)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Wildberries\Client\Model\InlineResponse20040[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function advV0AdvertsGetWithHttpInfo($status = null, $type = null, $limit = null, $offset = null, $order = null, $direction = null)
+    {
+        $returnType = '\Wildberries\Client\Model\InlineResponse20040[]';
+        $request = $this->advV0AdvertsGetRequest($status, $type, $limit, $offset, $order, $direction);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wildberries\Client\Model\InlineResponse20040[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation advV0AdvertsGetAsync
+     *
+     * Список РК
+     *
+     * @param  int $status &lt;dl&gt; &lt;dt&gt;Статус РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;9&lt;/code&gt; - идут показы&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;11&lt;/code&gt; - РК на паузе&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $limit Количество кампаний в ответе (optional)
+     * @param  int $offset Смещение относительно первой РК (optional)
+     * @param  string $order &lt;dl&gt; &lt;dt&gt;Порядок:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;create&lt;/code&gt; (по времени создания РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;change&lt;/code&gt; (по времени последнего изменения РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;id&lt;/code&gt; (по идентификатору РК)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;&lt;b&gt;order&#x3D;change&lt;/b&gt;&amp;direction&#x3D;asc**&lt;/code&gt; (optional)
+     * @param  string $direction &lt;dl&gt; &lt;dt&gt;Направление:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;desc&lt;/code&gt; (от большего к меньшему)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;asc&lt;/code&gt; (от меньшего к большему)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;order&#x3D;change&amp;&lt;b&gt;direction&#x3D;asc&lt;/b&gt;**&lt;/code&gt; (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0AdvertsGetAsync($status = null, $type = null, $limit = null, $offset = null, $order = null, $direction = null)
+    {
+        return $this->advV0AdvertsGetAsyncWithHttpInfo($status, $type, $limit, $offset, $order, $direction)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation advV0AdvertsGetAsyncWithHttpInfo
+     *
+     * Список РК
+     *
+     * @param  int $status &lt;dl&gt; &lt;dt&gt;Статус РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;9&lt;/code&gt; - идут показы&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;11&lt;/code&gt; - РК на паузе&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $limit Количество кампаний в ответе (optional)
+     * @param  int $offset Смещение относительно первой РК (optional)
+     * @param  string $order &lt;dl&gt; &lt;dt&gt;Порядок:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;create&lt;/code&gt; (по времени создания РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;change&lt;/code&gt; (по времени последнего изменения РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;id&lt;/code&gt; (по идентификатору РК)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;&lt;b&gt;order&#x3D;change&lt;/b&gt;&amp;direction&#x3D;asc**&lt;/code&gt; (optional)
+     * @param  string $direction &lt;dl&gt; &lt;dt&gt;Направление:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;desc&lt;/code&gt; (от большего к меньшему)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;asc&lt;/code&gt; (от меньшего к большему)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;order&#x3D;change&amp;&lt;b&gt;direction&#x3D;asc&lt;/b&gt;**&lt;/code&gt; (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0AdvertsGetAsyncWithHttpInfo($status = null, $type = null, $limit = null, $offset = null, $order = null, $direction = null)
+    {
+        $returnType = '\Wildberries\Client\Model\InlineResponse20040[]';
+        $request = $this->advV0AdvertsGetRequest($status, $type, $limit, $offset, $order, $direction);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'advV0AdvertsGet'
+     *
+     * @param  int $status &lt;dl&gt; &lt;dt&gt;Статус РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;9&lt;/code&gt; - идут показы&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;11&lt;/code&gt; - РК на паузе&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (optional)
+     * @param  int $limit Количество кампаний в ответе (optional)
+     * @param  int $offset Смещение относительно первой РК (optional)
+     * @param  string $order &lt;dl&gt; &lt;dt&gt;Порядок:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;create&lt;/code&gt; (по времени создания РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;change&lt;/code&gt; (по времени последнего изменения РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;id&lt;/code&gt; (по идентификатору РК)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;&lt;b&gt;order&#x3D;change&lt;/b&gt;&amp;direction&#x3D;asc**&lt;/code&gt; (optional)
+     * @param  string $direction &lt;dl&gt; &lt;dt&gt;Направление:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;desc&lt;/code&gt; (от большего к меньшему)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;asc&lt;/code&gt; (от меньшего к большему)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;order&#x3D;change&amp;&lt;b&gt;direction&#x3D;asc&lt;/b&gt;**&lt;/code&gt; (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function advV0AdvertsGetRequest($status = null, $type = null, $limit = null, $offset = null, $order = null, $direction = null)
+    {
+
+        $resourcePath = '/adv/v0/adverts';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($status !== null) {
+            $queryParams['status'] = ObjectSerializer::toQueryValue($status, null);
+        }
+        // query params
+        if ($type !== null) {
+            $queryParams['type'] = ObjectSerializer::toQueryValue($type, null);
+        }
+        // query params
+        if ($limit !== null) {
+            $queryParams['limit'] = ObjectSerializer::toQueryValue($limit, null);
+        }
+        // query params
+        if ($offset !== null) {
+            $queryParams['offset'] = ObjectSerializer::toQueryValue($offset, null);
+        }
+        // query params
+        if ($order !== null) {
+            $queryParams['order'] = ObjectSerializer::toQueryValue($order, null);
+        }
+        // query params
+        if ($direction !== null) {
+            $queryParams['direction'] = ObjectSerializer::toQueryValue($direction, null);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation advV0CountGet
+     *
+     * Получение РК
+     *
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Wildberries\Client\Model\InlineResponse20039
+     */
+    public function advV0CountGet()
+    {
+        list($response) = $this->advV0CountGetWithHttpInfo();
+        return $response;
+    }
+
+    /**
+     * Operation advV0CountGetWithHttpInfo
+     *
+     * Получение РК
+     *
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Wildberries\Client\Model\InlineResponse20039, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function advV0CountGetWithHttpInfo()
+    {
+        $returnType = '\Wildberries\Client\Model\InlineResponse20039';
+        $request = $this->advV0CountGetRequest();
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wildberries\Client\Model\InlineResponse20039',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation advV0CountGetAsync
+     *
+     * Получение РК
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0CountGetAsync()
+    {
+        return $this->advV0CountGetAsyncWithHttpInfo()
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation advV0CountGetAsyncWithHttpInfo
+     *
+     * Получение РК
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0CountGetAsyncWithHttpInfo()
+    {
+        $returnType = '\Wildberries\Client\Model\InlineResponse20039';
+        $request = $this->advV0CountGetRequest();
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'advV0CountGet'
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function advV0CountGetRequest()
+    {
+
+        $resourcePath = '/adv/v0/count';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation advV0CpmGet
+     *
+     * Список ставок
+     *
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (required)
+     * @param  int $param Параметр запроса, по которому будет получен список ставок активных РК. &lt;br&gt;Должен быть значением &#x60;menuId&#x60;, &#x60;subjectId&#x60; или &#x60;setId&#x60; в зависимости от типа РК. (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Wildberries\Client\Model\InlineResponse20042[]
+     */
+    public function advV0CpmGet($type, $param)
+    {
+        list($response) = $this->advV0CpmGetWithHttpInfo($type, $param);
+        return $response;
+    }
+
+    /**
+     * Operation advV0CpmGetWithHttpInfo
+     *
+     * Список ставок
+     *
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (required)
+     * @param  int $param Параметр запроса, по которому будет получен список ставок активных РК. &lt;br&gt;Должен быть значением &#x60;menuId&#x60;, &#x60;subjectId&#x60; или &#x60;setId&#x60; в зависимости от типа РК. (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Wildberries\Client\Model\InlineResponse20042[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function advV0CpmGetWithHttpInfo($type, $param)
+    {
+        $returnType = '\Wildberries\Client\Model\InlineResponse20042[]';
+        $request = $this->advV0CpmGetRequest($type, $param);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wildberries\Client\Model\InlineResponse20042[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation advV0CpmGetAsync
+     *
+     * Список ставок
+     *
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (required)
+     * @param  int $param Параметр запроса, по которому будет получен список ставок активных РК. &lt;br&gt;Должен быть значением &#x60;menuId&#x60;, &#x60;subjectId&#x60; или &#x60;setId&#x60; в зависимости от типа РК. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0CpmGetAsync($type, $param)
+    {
+        return $this->advV0CpmGetAsyncWithHttpInfo($type, $param)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation advV0CpmGetAsyncWithHttpInfo
+     *
+     * Список ставок
+     *
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (required)
+     * @param  int $param Параметр запроса, по которому будет получен список ставок активных РК. &lt;br&gt;Должен быть значением &#x60;menuId&#x60;, &#x60;subjectId&#x60; или &#x60;setId&#x60; в зависимости от типа РК. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0CpmGetAsyncWithHttpInfo($type, $param)
+    {
+        $returnType = '\Wildberries\Client\Model\InlineResponse20042[]';
+        $request = $this->advV0CpmGetRequest($type, $param);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'advV0CpmGet'
+     *
+     * @param  int $type &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; (required)
+     * @param  int $param Параметр запроса, по которому будет получен список ставок активных РК. &lt;br&gt;Должен быть значением &#x60;menuId&#x60;, &#x60;subjectId&#x60; или &#x60;setId&#x60; в зависимости от типа РК. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function advV0CpmGetRequest($type, $param)
+    {
+        // verify the required parameter 'type' is set
+        if ($type === null || (is_array($type) && count($type) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $type when calling advV0CpmGet'
+            );
+        }
+        // verify the required parameter 'param' is set
+        if ($param === null || (is_array($param) && count($param) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $param when calling advV0CpmGet'
+            );
+        }
+
+        $resourcePath = '/adv/v0/cpm';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($type !== null) {
+            $queryParams['type'] = ObjectSerializer::toQueryValue($type, null);
+        }
+        // query params
+        if ($param !== null) {
+            $queryParams['param'] = ObjectSerializer::toQueryValue($param, null);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation advV0CpmPost
+     *
+     * Изменение ставки у РК
+     *
+     * @param  \Wildberries\Client\Model\V0CpmBody $body body (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function advV0CpmPost($body)
+    {
+        $this->advV0CpmPostWithHttpInfo($body);
+    }
+
+    /**
+     * Operation advV0CpmPostWithHttpInfo
+     *
+     * Изменение ставки у РК
+     *
+     * @param  \Wildberries\Client\Model\V0CpmBody $body (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function advV0CpmPostWithHttpInfo($body)
+    {
+        $returnType = '';
+        $request = $this->advV0CpmPostRequest($body);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation advV0CpmPostAsync
+     *
+     * Изменение ставки у РК
+     *
+     * @param  \Wildberries\Client\Model\V0CpmBody $body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0CpmPostAsync($body)
+    {
+        return $this->advV0CpmPostAsyncWithHttpInfo($body)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation advV0CpmPostAsyncWithHttpInfo
+     *
+     * Изменение ставки у РК
+     *
+     * @param  \Wildberries\Client\Model\V0CpmBody $body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0CpmPostAsyncWithHttpInfo($body)
+    {
+        $returnType = '';
+        $request = $this->advV0CpmPostRequest($body);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'advV0CpmPost'
+     *
+     * @param  \Wildberries\Client\Model\V0CpmBody $body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function advV0CpmPostRequest($body)
+    {
+        // verify the required parameter 'body' is set
+        if ($body === null || (is_array($body) && count($body) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $body when calling advV0CpmPost'
+            );
+        }
+
+        $resourcePath = '/adv/v0/cpm';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($body)) {
+            $_tempBody = $body;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                []
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                [],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation advV0PauseGet
+     *
+     * Пауза РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function advV0PauseGet($id)
+    {
+        $this->advV0PauseGetWithHttpInfo($id);
+    }
+
+    /**
+     * Operation advV0PauseGetWithHttpInfo
+     *
+     * Пауза РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function advV0PauseGetWithHttpInfo($id)
+    {
+        $returnType = '';
+        $request = $this->advV0PauseGetRequest($id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation advV0PauseGetAsync
+     *
+     * Пауза РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0PauseGetAsync($id)
+    {
+        return $this->advV0PauseGetAsyncWithHttpInfo($id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation advV0PauseGetAsyncWithHttpInfo
+     *
+     * Пауза РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0PauseGetAsyncWithHttpInfo($id)
+    {
+        $returnType = '';
+        $request = $this->advV0PauseGetRequest($id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'advV0PauseGet'
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function advV0PauseGetRequest($id)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling advV0PauseGet'
+            );
+        }
+
+        $resourcePath = '/adv/v0/pause';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($id !== null) {
+            $queryParams['id'] = ObjectSerializer::toQueryValue($id, null);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                []
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                [],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation advV0StartGet
+     *
+     * Запуск РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function advV0StartGet($id)
+    {
+        $this->advV0StartGetWithHttpInfo($id);
+    }
+
+    /**
+     * Operation advV0StartGetWithHttpInfo
+     *
+     * Запуск РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \Wildberries\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function advV0StartGetWithHttpInfo($id)
+    {
+        $returnType = '';
+        $request = $this->advV0StartGetRequest($id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation advV0StartGetAsync
+     *
+     * Запуск РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0StartGetAsync($id)
+    {
+        return $this->advV0StartGetAsyncWithHttpInfo($id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation advV0StartGetAsyncWithHttpInfo
+     *
+     * Запуск РК
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function advV0StartGetAsyncWithHttpInfo($id)
+    {
+        $returnType = '';
+        $request = $this->advV0StartGetRequest($id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'advV0StartGet'
+     *
+     * @param  int $id Идентификатор РК (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function advV0StartGetRequest($id)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling advV0StartGet'
+            );
+        }
+
+        $resourcePath = '/adv/v0/start';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($id !== null) {
+            $queryParams['id'] = ObjectSerializer::toQueryValue($id, null);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                []
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                [],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation apiV1SupplierExciseGoodsGet
      *
      * Отчет по КиЗам
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Wildberries\Client\Model\ExcItem[]
      */
-    public function apiV1SupplierExciseGoodsGet($key, $date_from)
+    public function apiV1SupplierExciseGoodsGet($date_from)
     {
-        list($response) = $this->apiV1SupplierExciseGoodsGetWithHttpInfo($key, $date_from);
+        list($response) = $this->apiV1SupplierExciseGoodsGetWithHttpInfo($date_from);
         return $response;
     }
 
@@ -109,17 +1876,16 @@ class DefaultApi
      *
      * Отчет по КиЗам
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Wildberries\Client\Model\ExcItem[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiV1SupplierExciseGoodsGetWithHttpInfo($key, $date_from)
+    public function apiV1SupplierExciseGoodsGetWithHttpInfo($date_from)
     {
         $returnType = '\Wildberries\Client\Model\ExcItem[]';
-        $request = $this->apiV1SupplierExciseGoodsGetRequest($key, $date_from);
+        $request = $this->apiV1SupplierExciseGoodsGetRequest($date_from);
 
         try {
             $options = $this->createHttpClientOption();
@@ -185,15 +1951,14 @@ class DefaultApi
      *
      * Отчет по КиЗам
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierExciseGoodsGetAsync($key, $date_from)
+    public function apiV1SupplierExciseGoodsGetAsync($date_from)
     {
-        return $this->apiV1SupplierExciseGoodsGetAsyncWithHttpInfo($key, $date_from)
+        return $this->apiV1SupplierExciseGoodsGetAsyncWithHttpInfo($date_from)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -206,16 +1971,15 @@ class DefaultApi
      *
      * Отчет по КиЗам
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierExciseGoodsGetAsyncWithHttpInfo($key, $date_from)
+    public function apiV1SupplierExciseGoodsGetAsyncWithHttpInfo($date_from)
     {
         $returnType = '\Wildberries\Client\Model\ExcItem[]';
-        $request = $this->apiV1SupplierExciseGoodsGetRequest($key, $date_from);
+        $request = $this->apiV1SupplierExciseGoodsGetRequest($date_from);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -257,20 +2021,13 @@ class DefaultApi
     /**
      * Create request for operation 'apiV1SupplierExciseGoodsGet'
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function apiV1SupplierExciseGoodsGetRequest($key, $date_from)
+    protected function apiV1SupplierExciseGoodsGetRequest($date_from)
     {
-        // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling apiV1SupplierExciseGoodsGet'
-            );
-        }
         // verify the required parameter 'date_from' is set
         if ($date_from === null || (is_array($date_from) && count($date_from) === 0)) {
             throw new \InvalidArgumentException(
@@ -285,10 +2042,6 @@ class DefaultApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($key !== null) {
-            $queryParams['key'] = ObjectSerializer::toQueryValue($key, null);
-        }
         // query params
         if ($date_from !== null) {
             $queryParams['dateFrom'] = ObjectSerializer::toQueryValue($date_from, 'RFC3339');
@@ -339,9 +2092,9 @@ class DefaultApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('key');
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
-            $queryParams['key'] = $apiKey;
+            $headers['Authorization'] = $apiKey;
         }
 
         $defaultHeaders = [];
@@ -369,16 +2122,15 @@ class DefaultApi
      *
      * Поставки
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Wildberries\Client\Model\IncomesItem[]
      */
-    public function apiV1SupplierIncomesGet($key, $date_from)
+    public function apiV1SupplierIncomesGet($date_from)
     {
-        list($response) = $this->apiV1SupplierIncomesGetWithHttpInfo($key, $date_from);
+        list($response) = $this->apiV1SupplierIncomesGetWithHttpInfo($date_from);
         return $response;
     }
 
@@ -387,17 +2139,16 @@ class DefaultApi
      *
      * Поставки
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Wildberries\Client\Model\IncomesItem[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiV1SupplierIncomesGetWithHttpInfo($key, $date_from)
+    public function apiV1SupplierIncomesGetWithHttpInfo($date_from)
     {
         $returnType = '\Wildberries\Client\Model\IncomesItem[]';
-        $request = $this->apiV1SupplierIncomesGetRequest($key, $date_from);
+        $request = $this->apiV1SupplierIncomesGetRequest($date_from);
 
         try {
             $options = $this->createHttpClientOption();
@@ -463,15 +2214,14 @@ class DefaultApi
      *
      * Поставки
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierIncomesGetAsync($key, $date_from)
+    public function apiV1SupplierIncomesGetAsync($date_from)
     {
-        return $this->apiV1SupplierIncomesGetAsyncWithHttpInfo($key, $date_from)
+        return $this->apiV1SupplierIncomesGetAsyncWithHttpInfo($date_from)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -484,16 +2234,15 @@ class DefaultApi
      *
      * Поставки
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierIncomesGetAsyncWithHttpInfo($key, $date_from)
+    public function apiV1SupplierIncomesGetAsyncWithHttpInfo($date_from)
     {
         $returnType = '\Wildberries\Client\Model\IncomesItem[]';
-        $request = $this->apiV1SupplierIncomesGetRequest($key, $date_from);
+        $request = $this->apiV1SupplierIncomesGetRequest($date_from);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -535,20 +2284,13 @@ class DefaultApi
     /**
      * Create request for operation 'apiV1SupplierIncomesGet'
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function apiV1SupplierIncomesGetRequest($key, $date_from)
+    protected function apiV1SupplierIncomesGetRequest($date_from)
     {
-        // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling apiV1SupplierIncomesGet'
-            );
-        }
         // verify the required parameter 'date_from' is set
         if ($date_from === null || (is_array($date_from) && count($date_from) === 0)) {
             throw new \InvalidArgumentException(
@@ -563,10 +2305,6 @@ class DefaultApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($key !== null) {
-            $queryParams['key'] = ObjectSerializer::toQueryValue($key, null);
-        }
         // query params
         if ($date_from !== null) {
             $queryParams['dateFrom'] = ObjectSerializer::toQueryValue($date_from, 'RFC3339');
@@ -617,9 +2355,9 @@ class DefaultApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('key');
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
-            $queryParams['key'] = $apiKey;
+            $headers['Authorization'] = $apiKey;
         }
 
         $defaultHeaders = [];
@@ -647,7 +2385,6 @@ class DefaultApi
      *
      * Заказы
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
@@ -655,9 +2392,9 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return \Wildberries\Client\Model\OrdersItem[]
      */
-    public function apiV1SupplierOrdersGet($key, $date_from, $flag = '0')
+    public function apiV1SupplierOrdersGet($date_from, $flag = '0')
     {
-        list($response) = $this->apiV1SupplierOrdersGetWithHttpInfo($key, $date_from, $flag);
+        list($response) = $this->apiV1SupplierOrdersGetWithHttpInfo($date_from, $flag);
         return $response;
     }
 
@@ -666,7 +2403,6 @@ class DefaultApi
      *
      * Заказы
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
@@ -674,10 +2410,10 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return array of \Wildberries\Client\Model\OrdersItem[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiV1SupplierOrdersGetWithHttpInfo($key, $date_from, $flag = '0')
+    public function apiV1SupplierOrdersGetWithHttpInfo($date_from, $flag = '0')
     {
         $returnType = '\Wildberries\Client\Model\OrdersItem[]';
-        $request = $this->apiV1SupplierOrdersGetRequest($key, $date_from, $flag);
+        $request = $this->apiV1SupplierOrdersGetRequest($date_from, $flag);
 
         try {
             $options = $this->createHttpClientOption();
@@ -743,16 +2479,15 @@ class DefaultApi
      *
      * Заказы
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierOrdersGetAsync($key, $date_from, $flag = '0')
+    public function apiV1SupplierOrdersGetAsync($date_from, $flag = '0')
     {
-        return $this->apiV1SupplierOrdersGetAsyncWithHttpInfo($key, $date_from, $flag)
+        return $this->apiV1SupplierOrdersGetAsyncWithHttpInfo($date_from, $flag)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -765,17 +2500,16 @@ class DefaultApi
      *
      * Заказы
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierOrdersGetAsyncWithHttpInfo($key, $date_from, $flag = '0')
+    public function apiV1SupplierOrdersGetAsyncWithHttpInfo($date_from, $flag = '0')
     {
         $returnType = '\Wildberries\Client\Model\OrdersItem[]';
-        $request = $this->apiV1SupplierOrdersGetRequest($key, $date_from, $flag);
+        $request = $this->apiV1SupplierOrdersGetRequest($date_from, $flag);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -817,21 +2551,14 @@ class DefaultApi
     /**
      * Create request for operation 'apiV1SupplierOrdersGet'
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function apiV1SupplierOrdersGetRequest($key, $date_from, $flag = '0')
+    protected function apiV1SupplierOrdersGetRequest($date_from, $flag = '0')
     {
-        // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling apiV1SupplierOrdersGet'
-            );
-        }
         // verify the required parameter 'date_from' is set
         if ($date_from === null || (is_array($date_from) && count($date_from) === 0)) {
             throw new \InvalidArgumentException(
@@ -846,10 +2573,6 @@ class DefaultApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($key !== null) {
-            $queryParams['key'] = ObjectSerializer::toQueryValue($key, null);
-        }
         // query params
         if ($date_from !== null) {
             $queryParams['dateFrom'] = ObjectSerializer::toQueryValue($date_from, 'RFC3339');
@@ -904,9 +2627,9 @@ class DefaultApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('key');
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
-            $queryParams['key'] = $apiKey;
+            $headers['Authorization'] = $apiKey;
         }
 
         $defaultHeaders = [];
@@ -934,7 +2657,6 @@ class DefaultApi
      *
      * Отчет о продажах по реализации
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  \DateTime $date_to Конечная дата отчета (required)
      * @param  int $limit Максимальное количество строк отчета, возвращаемых методом. Не может быть более 100 000. (optional, default to 0)
@@ -944,9 +2666,9 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return \Wildberries\Client\Model\DetailReportItem[]
      */
-    public function apiV1SupplierReportDetailByPeriodGet($key, $date_from, $date_to, $limit = '0', $rrdid = null)
+    public function apiV1SupplierReportDetailByPeriodGet($date_from, $date_to, $limit = '0', $rrdid = null)
     {
-        list($response) = $this->apiV1SupplierReportDetailByPeriodGetWithHttpInfo($key, $date_from, $date_to, $limit, $rrdid);
+        list($response) = $this->apiV1SupplierReportDetailByPeriodGetWithHttpInfo($date_from, $date_to, $limit, $rrdid);
         return $response;
     }
 
@@ -955,7 +2677,6 @@ class DefaultApi
      *
      * Отчет о продажах по реализации
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  \DateTime $date_to Конечная дата отчета (required)
      * @param  int $limit Максимальное количество строк отчета, возвращаемых методом. Не может быть более 100 000. (optional, default to 0)
@@ -965,10 +2686,10 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return array of \Wildberries\Client\Model\DetailReportItem[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiV1SupplierReportDetailByPeriodGetWithHttpInfo($key, $date_from, $date_to, $limit = '0', $rrdid = null)
+    public function apiV1SupplierReportDetailByPeriodGetWithHttpInfo($date_from, $date_to, $limit = '0', $rrdid = null)
     {
         $returnType = '\Wildberries\Client\Model\DetailReportItem[]';
-        $request = $this->apiV1SupplierReportDetailByPeriodGetRequest($key, $date_from, $date_to, $limit, $rrdid);
+        $request = $this->apiV1SupplierReportDetailByPeriodGetRequest($date_from, $date_to, $limit, $rrdid);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1034,7 +2755,6 @@ class DefaultApi
      *
      * Отчет о продажах по реализации
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  \DateTime $date_to Конечная дата отчета (required)
      * @param  int $limit Максимальное количество строк отчета, возвращаемых методом. Не может быть более 100 000. (optional, default to 0)
@@ -1043,9 +2763,9 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierReportDetailByPeriodGetAsync($key, $date_from, $date_to, $limit = '0', $rrdid = null)
+    public function apiV1SupplierReportDetailByPeriodGetAsync($date_from, $date_to, $limit = '0', $rrdid = null)
     {
-        return $this->apiV1SupplierReportDetailByPeriodGetAsyncWithHttpInfo($key, $date_from, $date_to, $limit, $rrdid)
+        return $this->apiV1SupplierReportDetailByPeriodGetAsyncWithHttpInfo($date_from, $date_to, $limit, $rrdid)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1058,7 +2778,6 @@ class DefaultApi
      *
      * Отчет о продажах по реализации
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  \DateTime $date_to Конечная дата отчета (required)
      * @param  int $limit Максимальное количество строк отчета, возвращаемых методом. Не может быть более 100 000. (optional, default to 0)
@@ -1067,10 +2786,10 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierReportDetailByPeriodGetAsyncWithHttpInfo($key, $date_from, $date_to, $limit = '0', $rrdid = null)
+    public function apiV1SupplierReportDetailByPeriodGetAsyncWithHttpInfo($date_from, $date_to, $limit = '0', $rrdid = null)
     {
         $returnType = '\Wildberries\Client\Model\DetailReportItem[]';
-        $request = $this->apiV1SupplierReportDetailByPeriodGetRequest($key, $date_from, $date_to, $limit, $rrdid);
+        $request = $this->apiV1SupplierReportDetailByPeriodGetRequest($date_from, $date_to, $limit, $rrdid);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1112,7 +2831,6 @@ class DefaultApi
     /**
      * Create request for operation 'apiV1SupplierReportDetailByPeriodGet'
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  \DateTime $date_to Конечная дата отчета (required)
      * @param  int $limit Максимальное количество строк отчета, возвращаемых методом. Не может быть более 100 000. (optional, default to 0)
@@ -1121,14 +2839,8 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function apiV1SupplierReportDetailByPeriodGetRequest($key, $date_from, $date_to, $limit = '0', $rrdid = null)
+    protected function apiV1SupplierReportDetailByPeriodGetRequest($date_from, $date_to, $limit = '0', $rrdid = null)
     {
-        // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling apiV1SupplierReportDetailByPeriodGet'
-            );
-        }
         // verify the required parameter 'date_from' is set
         if ($date_from === null || (is_array($date_from) && count($date_from) === 0)) {
             throw new \InvalidArgumentException(
@@ -1149,10 +2861,6 @@ class DefaultApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($key !== null) {
-            $queryParams['key'] = ObjectSerializer::toQueryValue($key, null);
-        }
         // query params
         if ($date_from !== null) {
             $queryParams['dateFrom'] = ObjectSerializer::toQueryValue($date_from, 'RFC3339');
@@ -1215,9 +2923,9 @@ class DefaultApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('key');
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
-            $queryParams['key'] = $apiKey;
+            $headers['Authorization'] = $apiKey;
         }
 
         $defaultHeaders = [];
@@ -1245,7 +2953,6 @@ class DefaultApi
      *
      * Продажи
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
@@ -1253,9 +2960,9 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return \Wildberries\Client\Model\SalesItem[]
      */
-    public function apiV1SupplierSalesGet($key, $date_from, $flag = '0')
+    public function apiV1SupplierSalesGet($date_from, $flag = '0')
     {
-        list($response) = $this->apiV1SupplierSalesGetWithHttpInfo($key, $date_from, $flag);
+        list($response) = $this->apiV1SupplierSalesGetWithHttpInfo($date_from, $flag);
         return $response;
     }
 
@@ -1264,7 +2971,6 @@ class DefaultApi
      *
      * Продажи
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
@@ -1272,10 +2978,10 @@ class DefaultApi
      * @throws \InvalidArgumentException
      * @return array of \Wildberries\Client\Model\SalesItem[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiV1SupplierSalesGetWithHttpInfo($key, $date_from, $flag = '0')
+    public function apiV1SupplierSalesGetWithHttpInfo($date_from, $flag = '0')
     {
         $returnType = '\Wildberries\Client\Model\SalesItem[]';
-        $request = $this->apiV1SupplierSalesGetRequest($key, $date_from, $flag);
+        $request = $this->apiV1SupplierSalesGetRequest($date_from, $flag);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1341,16 +3047,15 @@ class DefaultApi
      *
      * Продажи
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierSalesGetAsync($key, $date_from, $flag = '0')
+    public function apiV1SupplierSalesGetAsync($date_from, $flag = '0')
     {
-        return $this->apiV1SupplierSalesGetAsyncWithHttpInfo($key, $date_from, $flag)
+        return $this->apiV1SupplierSalesGetAsyncWithHttpInfo($date_from, $flag)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1363,17 +3068,16 @@ class DefaultApi
      *
      * Продажи
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierSalesGetAsyncWithHttpInfo($key, $date_from, $flag = '0')
+    public function apiV1SupplierSalesGetAsyncWithHttpInfo($date_from, $flag = '0')
     {
         $returnType = '\Wildberries\Client\Model\SalesItem[]';
-        $request = $this->apiV1SupplierSalesGetRequest($key, $date_from, $flag);
+        $request = $this->apiV1SupplierSalesGetRequest($date_from, $flag);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1415,21 +3119,14 @@ class DefaultApi
     /**
      * Create request for operation 'apiV1SupplierSalesGet'
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      * @param  int $flag Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. (optional, default to 0)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function apiV1SupplierSalesGetRequest($key, $date_from, $flag = '0')
+    protected function apiV1SupplierSalesGetRequest($date_from, $flag = '0')
     {
-        // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling apiV1SupplierSalesGet'
-            );
-        }
         // verify the required parameter 'date_from' is set
         if ($date_from === null || (is_array($date_from) && count($date_from) === 0)) {
             throw new \InvalidArgumentException(
@@ -1444,10 +3141,6 @@ class DefaultApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($key !== null) {
-            $queryParams['key'] = ObjectSerializer::toQueryValue($key, null);
-        }
         // query params
         if ($date_from !== null) {
             $queryParams['dateFrom'] = ObjectSerializer::toQueryValue($date_from, 'RFC3339');
@@ -1502,9 +3195,9 @@ class DefaultApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('key');
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
-            $queryParams['key'] = $apiKey;
+            $headers['Authorization'] = $apiKey;
         }
 
         $defaultHeaders = [];
@@ -1532,16 +3225,15 @@ class DefaultApi
      *
      * Склад
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Wildberries\Client\Model\StocksItem[]
      */
-    public function apiV1SupplierStocksGet($key, $date_from)
+    public function apiV1SupplierStocksGet($date_from)
     {
-        list($response) = $this->apiV1SupplierStocksGetWithHttpInfo($key, $date_from);
+        list($response) = $this->apiV1SupplierStocksGetWithHttpInfo($date_from);
         return $response;
     }
 
@@ -1550,17 +3242,16 @@ class DefaultApi
      *
      * Склад
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \Wildberries\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Wildberries\Client\Model\StocksItem[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiV1SupplierStocksGetWithHttpInfo($key, $date_from)
+    public function apiV1SupplierStocksGetWithHttpInfo($date_from)
     {
         $returnType = '\Wildberries\Client\Model\StocksItem[]';
-        $request = $this->apiV1SupplierStocksGetRequest($key, $date_from);
+        $request = $this->apiV1SupplierStocksGetRequest($date_from);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1626,15 +3317,14 @@ class DefaultApi
      *
      * Склад
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierStocksGetAsync($key, $date_from)
+    public function apiV1SupplierStocksGetAsync($date_from)
     {
-        return $this->apiV1SupplierStocksGetAsyncWithHttpInfo($key, $date_from)
+        return $this->apiV1SupplierStocksGetAsyncWithHttpInfo($date_from)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1647,16 +3337,15 @@ class DefaultApi
      *
      * Склад
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiV1SupplierStocksGetAsyncWithHttpInfo($key, $date_from)
+    public function apiV1SupplierStocksGetAsyncWithHttpInfo($date_from)
     {
         $returnType = '\Wildberries\Client\Model\StocksItem[]';
-        $request = $this->apiV1SupplierStocksGetRequest($key, $date_from);
+        $request = $this->apiV1SupplierStocksGetRequest($date_from);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1698,20 +3387,13 @@ class DefaultApi
     /**
      * Create request for operation 'apiV1SupplierStocksGet'
      *
-     * @param  string $key Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». (required)
      * @param  string $date_from Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function apiV1SupplierStocksGetRequest($key, $date_from)
+    protected function apiV1SupplierStocksGetRequest($date_from)
     {
-        // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling apiV1SupplierStocksGet'
-            );
-        }
         // verify the required parameter 'date_from' is set
         if ($date_from === null || (is_array($date_from) && count($date_from) === 0)) {
             throw new \InvalidArgumentException(
@@ -1726,10 +3408,6 @@ class DefaultApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($key !== null) {
-            $queryParams['key'] = ObjectSerializer::toQueryValue($key, null);
-        }
         // query params
         if ($date_from !== null) {
             $queryParams['dateFrom'] = ObjectSerializer::toQueryValue($date_from, 'RFC3339');
@@ -1780,9 +3458,9 @@ class DefaultApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('key');
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
-            $queryParams['key'] = $apiKey;
+            $headers['Authorization'] = $apiKey;
         }
 
         $defaultHeaders = [];

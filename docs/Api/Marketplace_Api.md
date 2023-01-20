@@ -518,7 +518,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV3StocksWarehousePut**
-> apiV3StocksWarehousePut($body, $warehouse)
+> apiV3StocksWarehousePut($warehouse, $body)
 
 Обновить остатки товаров
 
@@ -539,11 +539,11 @@ $apiInstance = new Wildberries\Client\Api\Marketplace_Api(
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Wildberries\Client\Model\StocksWarehouseBody(); // \Wildberries\Client\Model\StocksWarehouseBody | 
 $warehouse = 56; // int | Идентификатор склада поставщика
+$body = new \Wildberries\Client\Model\StocksWarehouseBody(); // \Wildberries\Client\Model\StocksWarehouseBody | 
 
 try {
-    $apiInstance->apiV3StocksWarehousePut($body, $warehouse);
+    $apiInstance->apiV3StocksWarehousePut($warehouse, $body);
 } catch (Exception $e) {
     echo 'Exception when calling Marketplace_Api->apiV3StocksWarehousePut: ', $e->getMessage(), PHP_EOL;
 }
@@ -554,8 +554,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Wildberries\Client\Model\StocksWarehouseBody**](../Model/StocksWarehouseBody.md)|  |
  **warehouse** | **int**| Идентификатор склада поставщика |
+ **body** | [**\Wildberries\Client\Model\StocksWarehouseBody**](../Model/StocksWarehouseBody.md)|  | [optional]
 
 ### Return type
 

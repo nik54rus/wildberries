@@ -4,6 +4,13 @@ All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**advV0AdvertGet**](DefaultApi.md#advv0advertget) | **GET** /adv/v0/advert | Информация о РК
+[**advV0AdvertsGet**](DefaultApi.md#advv0advertsget) | **GET** /adv/v0/adverts | Список РК
+[**advV0CountGet**](DefaultApi.md#advv0countget) | **GET** /adv/v0/count | Получение РК
+[**advV0CpmGet**](DefaultApi.md#advv0cpmget) | **GET** /adv/v0/cpm | Список ставок
+[**advV0CpmPost**](DefaultApi.md#advv0cpmpost) | **POST** /adv/v0/cpm | Изменение ставки у РК
+[**advV0PauseGet**](DefaultApi.md#advv0pauseget) | **GET** /adv/v0/pause | Пауза РК
+[**advV0StartGet**](DefaultApi.md#advv0startget) | **GET** /adv/v0/start | Запуск РК
 [**apiV1SupplierExciseGoodsGet**](DefaultApi.md#apiv1supplierexcisegoodsget) | **GET** /api/v1/supplier/excise-goods | Отчет по КиЗам
 [**apiV1SupplierIncomesGet**](DefaultApi.md#apiv1supplierincomesget) | **GET** /api/v1/supplier/incomes | Поставки
 [**apiV1SupplierOrdersGet**](DefaultApi.md#apiv1supplierordersget) | **GET** /api/v1/supplier/orders | Заказы
@@ -13,8 +20,391 @@ Method | HTTP request | Description
 [**publicApiV1InfoGet**](DefaultApi.md#publicapiv1infoget) | **GET** /public/api/v1/info | Получение информации о ценах.
 [**publicApiV1PricesPost**](DefaultApi.md#publicapiv1pricespost) | **POST** /public/api/v1/prices | Загрузка цен
 
+# **advV0AdvertGet**
+> \Wildberries\Client\Model\InlineResponse20041 advV0AdvertGet($id)
+
+Информация о РК
+
+Получение информации об одной РК
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+$apiInstance = new Wildberries\Client\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int | Идентификатор РК
+
+try {
+    $result = $apiInstance->advV0AdvertGet($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->advV0AdvertGet: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| Идентификатор РК |
+
+### Return type
+
+[**\Wildberries\Client\Model\InlineResponse20041**](../Model/InlineResponse20041.md)
+
+### Authorization
+
+[HeaderApiKey](../../README.md#HeaderApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **advV0AdvertsGet**
+> \Wildberries\Client\Model\InlineResponse20040[] advV0AdvertsGet($status, $type, $limit, $offset, $order, $direction)
+
+Список РК
+
+Получение списка РК поставщика
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+$apiInstance = new Wildberries\Client\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$status = 56; // int | <dl> <dt>Статус РК:</dt> <dd><code>9</code> - идут показы</dd> <dd><code>11</code> - РК на паузе</dd> </dl>
+$type = 56; // int | <dl> <dt>Тип РК:</dt> <dd><code>4</code> - реклама в каталоге</dd> <dd><code>5</code> - реклама в карточке товара</dd> <dd><code>6</code> - реклама в поиске</dd> <dd><code>7</code> - реклама в рекомендациях на главной странице</dd> </dl>
+$limit = 56; // int | Количество кампаний в ответе
+$offset = 56; // int | Смещение относительно первой РК
+$order = "order_example"; // string | <dl> <dt>Порядок:</dt> <dd><code>create</code> (по времени создания РК)</dd> <dd><code>change</code> (по времени последнего изменения РК)</dd> <dd><code>id</code> (по идентификатору РК)</dd> </dl> <br>Например: <code>**_/api/v0/adverts?type=6&limit=5&offset=10&<b>order=change</b>&direction=asc**</code>
+$direction = "direction_example"; // string | <dl> <dt>Направление:</dt> <dd><code>desc</code> (от большего к меньшему)</dd> <dd><code>asc</code> (от меньшего к большему)</dd> </dl> <br>Например: <code>**_/api/v0/adverts?type=6&limit=5&offset=10&order=change&<b>direction=asc</b>**</code>
+
+try {
+    $result = $apiInstance->advV0AdvertsGet($status, $type, $limit, $offset, $order, $direction);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->advV0AdvertsGet: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **status** | **int**| &lt;dl&gt; &lt;dt&gt;Статус РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;9&lt;/code&gt; - идут показы&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;11&lt;/code&gt; - РК на паузе&lt;/dd&gt; &lt;/dl&gt; | [optional]
+ **type** | **int**| &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; | [optional]
+ **limit** | **int**| Количество кампаний в ответе | [optional]
+ **offset** | **int**| Смещение относительно первой РК | [optional]
+ **order** | **string**| &lt;dl&gt; &lt;dt&gt;Порядок:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;create&lt;/code&gt; (по времени создания РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;change&lt;/code&gt; (по времени последнего изменения РК)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;id&lt;/code&gt; (по идентификатору РК)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;&lt;b&gt;order&#x3D;change&lt;/b&gt;&amp;direction&#x3D;asc**&lt;/code&gt; | [optional]
+ **direction** | **string**| &lt;dl&gt; &lt;dt&gt;Направление:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;desc&lt;/code&gt; (от большего к меньшему)&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;asc&lt;/code&gt; (от меньшего к большему)&lt;/dd&gt; &lt;/dl&gt; &lt;br&gt;Например: &lt;code&gt;**_/api/v0/adverts?type&#x3D;6&amp;limit&#x3D;5&amp;offset&#x3D;10&amp;order&#x3D;change&amp;&lt;b&gt;direction&#x3D;asc&lt;/b&gt;**&lt;/code&gt; | [optional]
+
+### Return type
+
+[**\Wildberries\Client\Model\InlineResponse20040[]**](../Model/InlineResponse20040.md)
+
+### Authorization
+
+[HeaderApiKey](../../README.md#HeaderApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **advV0CountGet**
+> \Wildberries\Client\Model\InlineResponse20039 advV0CountGet()
+
+Получение РК
+
+Получение количества рекламных кампаний (РК) поставщика
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+$apiInstance = new Wildberries\Client\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->advV0CountGet();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->advV0CountGet: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Wildberries\Client\Model\InlineResponse20039**](../Model/InlineResponse20039.md)
+
+### Authorization
+
+[HeaderApiKey](../../README.md#HeaderApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **advV0CpmGet**
+> \Wildberries\Client\Model\InlineResponse20042[] advV0CpmGet($type, $param)
+
+Список ставок
+
+Получение списка ставок для типа размещения
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+$apiInstance = new Wildberries\Client\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$type = 56; // int | <dl> <dt>Тип РК:</dt> <dd><code>4</code> - реклама в каталоге</dd> <dd><code>5</code> - реклама в карточке товара</dd> <dd><code>6</code> - реклама в поиске</dd> <dd><code>7</code> - реклама в рекомендациях на главной странице</dd> </dl>
+$param = 56; // int | Параметр запроса, по которому будет получен список ставок активных РК. <br>Должен быть значением `menuId`, `subjectId` или `setId` в зависимости от типа РК.
+
+try {
+    $result = $apiInstance->advV0CpmGet($type, $param);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->advV0CpmGet: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **type** | **int**| &lt;dl&gt; &lt;dt&gt;Тип РК:&lt;/dt&gt; &lt;dd&gt;&lt;code&gt;4&lt;/code&gt; - реклама в каталоге&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;5&lt;/code&gt; - реклама в карточке товара&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;6&lt;/code&gt; - реклама в поиске&lt;/dd&gt; &lt;dd&gt;&lt;code&gt;7&lt;/code&gt; - реклама в рекомендациях на главной странице&lt;/dd&gt; &lt;/dl&gt; |
+ **param** | **int**| Параметр запроса, по которому будет получен список ставок активных РК. &lt;br&gt;Должен быть значением &#x60;menuId&#x60;, &#x60;subjectId&#x60; или &#x60;setId&#x60; в зависимости от типа РК. |
+
+### Return type
+
+[**\Wildberries\Client\Model\InlineResponse20042[]**](../Model/InlineResponse20042.md)
+
+### Authorization
+
+[HeaderApiKey](../../README.md#HeaderApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **advV0CpmPost**
+> advV0CpmPost($body)
+
+Изменение ставки у РК
+
+Изменение ставки у рекламной кампании <br>Доступно для РК в карточке товара, поиске или рекомендациях
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+$apiInstance = new Wildberries\Client\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$body = new \Wildberries\Client\Model\V0CpmBody(); // \Wildberries\Client\Model\V0CpmBody | 
+
+try {
+    $apiInstance->advV0CpmPost($body);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->advV0CpmPost: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**\Wildberries\Client\Model\V0CpmBody**](../Model/V0CpmBody.md)|  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[HeaderApiKey](../../README.md#HeaderApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **advV0PauseGet**
+> advV0PauseGet($id)
+
+Пауза РК
+
+РК в статусе <b>\"9 - идут показы\"</b> - можно запаузить, сделав <b>GET</b> на  `/api/v0/pause?id=***`.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+$apiInstance = new Wildberries\Client\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int | Идентификатор РК
+
+try {
+    $apiInstance->advV0PauseGet($id);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->advV0PauseGet: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| Идентификатор РК |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[HeaderApiKey](../../README.md#HeaderApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **advV0StartGet**
+> advV0StartGet($id)
+
+Запуск РК
+
+РК в статусе <b>\"11 - на паузе\"</b> - можно снова запустить. <br>Для запуска необходимо, чтобы у РК были активные ставки. <br><b>GET</b> на `/api/v0/start?id=***` - в ответ `200`, если статус изменен, или `400`, если это сделать не удалось.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+$apiInstance = new Wildberries\Client\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int | Идентификатор РК
+
+try {
+    $apiInstance->advV0StartGet($id);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->advV0StartGet: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| Идентификатор РК |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[HeaderApiKey](../../README.md#HeaderApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 # **apiV1SupplierExciseGoodsGet**
-> \Wildberries\Client\Model\ExcItem[] apiV1SupplierExciseGoodsGet($key, $date_from)
+> \Wildberries\Client\Model\ExcItem[] apiV1SupplierExciseGoodsGet($date_from)
 
 Отчет по КиЗам
 
@@ -24,10 +414,10 @@ Method | HTTP request | Description
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-// Configure API key authorization: ApiKey
-$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('key', 'YOUR_API_KEY');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('key', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
 $apiInstance = new Wildberries\Client\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -35,11 +425,10 @@ $apiInstance = new Wildberries\Client\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$key = "key_example"; // string | Ключ аутентификации.<br>  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API».
 $date_from = "date_from_example"; // string | Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br>Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>
 
 try {
-    $result = $apiInstance->apiV1SupplierExciseGoodsGet($key, $date_from);
+    $result = $apiInstance->apiV1SupplierExciseGoodsGet($date_from);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->apiV1SupplierExciseGoodsGet: ', $e->getMessage(), PHP_EOL;
@@ -51,7 +440,6 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key** | **string**| Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». |
  **date_from** | **string**| Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; |
 
 ### Return type
@@ -60,7 +448,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../../README.md#ApiKey)
+[HeaderApiKey](../../README.md#HeaderApiKey)
 
 ### HTTP request headers
 
@@ -70,7 +458,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV1SupplierIncomesGet**
-> \Wildberries\Client\Model\IncomesItem[] apiV1SupplierIncomesGet($key, $date_from)
+> \Wildberries\Client\Model\IncomesItem[] apiV1SupplierIncomesGet($date_from)
 
 Поставки
 
@@ -80,10 +468,10 @@ Name | Type | Description  | Notes
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-// Configure API key authorization: ApiKey
-$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('key', 'YOUR_API_KEY');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('key', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
 $apiInstance = new Wildberries\Client\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -91,11 +479,10 @@ $apiInstance = new Wildberries\Client\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$key = "key_example"; // string | Ключ аутентификации.<br>  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API».
 $date_from = "date_from_example"; // string | Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br>Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>
 
 try {
-    $result = $apiInstance->apiV1SupplierIncomesGet($key, $date_from);
+    $result = $apiInstance->apiV1SupplierIncomesGet($date_from);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->apiV1SupplierIncomesGet: ', $e->getMessage(), PHP_EOL;
@@ -107,7 +494,6 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key** | **string**| Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». |
  **date_from** | **string**| Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; |
 
 ### Return type
@@ -116,7 +502,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../../README.md#ApiKey)
+[HeaderApiKey](../../README.md#HeaderApiKey)
 
 ### HTTP request headers
 
@@ -126,7 +512,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV1SupplierOrdersGet**
-> \Wildberries\Client\Model\OrdersItem[] apiV1SupplierOrdersGet($key, $date_from, $flag)
+> \Wildberries\Client\Model\OrdersItem[] apiV1SupplierOrdersGet($date_from, $flag)
 
 Заказы
 
@@ -136,10 +522,10 @@ Name | Type | Description  | Notes
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-// Configure API key authorization: ApiKey
-$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('key', 'YOUR_API_KEY');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('key', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
 $apiInstance = new Wildberries\Client\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -147,12 +533,11 @@ $apiInstance = new Wildberries\Client\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$key = "key_example"; // string | Ключ аутентификации.<br>  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API».
 $date_from = "date_from_example"; // string | Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br>Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>
 $flag = 0; // int | Если параметр `flag=0` (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля `lastChangeDate` (дата время обновления информации в сервисе) больше или равно переданному  значению параметра `dateFrom`.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. <br> Если параметр `flag=1`, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру `dateFrom` (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре `dateFrom`.
 
 try {
-    $result = $apiInstance->apiV1SupplierOrdersGet($key, $date_from, $flag);
+    $result = $apiInstance->apiV1SupplierOrdersGet($date_from, $flag);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->apiV1SupplierOrdersGet: ', $e->getMessage(), PHP_EOL;
@@ -164,7 +549,6 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key** | **string**| Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». |
  **date_from** | **string**| Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; |
  **flag** | **int**| Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. | [optional] [default to 0]
 
@@ -174,7 +558,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../../README.md#ApiKey)
+[HeaderApiKey](../../README.md#HeaderApiKey)
 
 ### HTTP request headers
 
@@ -184,20 +568,20 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV1SupplierReportDetailByPeriodGet**
-> \Wildberries\Client\Model\DetailReportItem[] apiV1SupplierReportDetailByPeriodGet($key, $date_from, $date_to, $limit, $rrdid)
+> \Wildberries\Client\Model\DetailReportItem[] apiV1SupplierReportDetailByPeriodGet($date_from, $date_to, $limit, $rrdid)
 
 Отчет о продажах по реализации
 
-Отчет о продажах по реализации.  <br> В отчете доступны данные за последние 3 месяца. <br> В случае отсутствия данных за указанный период метод вернет `null`. <br> Технический перерыв в работе метода: каждый понедельник с 3:00 до 14:00.
+Отчет о продажах по реализации.  <br> В отчете доступны данные за последние 3 месяца. <br> В случае отсутствия данных за указанный период метод вернет `null`. <br> Технический перерыв в работе метода: каждый понедельник с 3:00 до 16:00.
 
 ### Example
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-// Configure API key authorization: ApiKey
-$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('key', 'YOUR_API_KEY');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('key', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
 $apiInstance = new Wildberries\Client\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -205,14 +589,13 @@ $apiInstance = new Wildberries\Client\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$key = "key_example"; // string | Ключ аутентификации.<br>  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API».
 $date_from = "date_from_example"; // string | Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br>Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>
 $date_to = new \DateTime("2013-10-20"); // \DateTime | Конечная дата отчета
 $limit = 0; // int | Максимальное количество строк отчета, возвращаемых методом. Не может быть более 100 000.
 $rrdid = 56; // int | Уникальный идентификатор строки отчета. Необходим для получения отчета частями.  <br> Загрузку отчета нужно начинать с `rrdid = 0` и при последующих вызовах API передавать в запросе значение `rrd_id` из последней строки, полученной в результате предыдущего вызова.  <br> Таким образом для загрузки одного отчета может понадобиться вызывать API до тех пор, пока количество возвращаемых строк не станет равным нулю.
 
 try {
-    $result = $apiInstance->apiV1SupplierReportDetailByPeriodGet($key, $date_from, $date_to, $limit, $rrdid);
+    $result = $apiInstance->apiV1SupplierReportDetailByPeriodGet($date_from, $date_to, $limit, $rrdid);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->apiV1SupplierReportDetailByPeriodGet: ', $e->getMessage(), PHP_EOL;
@@ -224,7 +607,6 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key** | **string**| Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». |
  **date_from** | **string**| Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; |
  **date_to** | **\DateTime**| Конечная дата отчета |
  **limit** | **int**| Максимальное количество строк отчета, возвращаемых методом. Не может быть более 100 000. | [optional] [default to 0]
@@ -236,7 +618,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../../README.md#ApiKey)
+[HeaderApiKey](../../README.md#HeaderApiKey)
 
 ### HTTP request headers
 
@@ -246,7 +628,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV1SupplierSalesGet**
-> \Wildberries\Client\Model\SalesItem[] apiV1SupplierSalesGet($key, $date_from, $flag)
+> \Wildberries\Client\Model\SalesItem[] apiV1SupplierSalesGet($date_from, $flag)
 
 Продажи
 
@@ -256,10 +638,10 @@ Name | Type | Description  | Notes
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-// Configure API key authorization: ApiKey
-$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('key', 'YOUR_API_KEY');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('key', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
 $apiInstance = new Wildberries\Client\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -267,12 +649,11 @@ $apiInstance = new Wildberries\Client\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$key = "key_example"; // string | Ключ аутентификации.<br>  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API».
 $date_from = "date_from_example"; // string | Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br>Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>
 $flag = 0; // int | Если параметр `flag=0` (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля `lastChangeDate` (дата время обновления информации в сервисе) больше или равно переданному  значению параметра `dateFrom`.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. <br> Если параметр `flag=1`, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру `dateFrom` (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре `dateFrom`.
 
 try {
-    $result = $apiInstance->apiV1SupplierSalesGet($key, $date_from, $flag);
+    $result = $apiInstance->apiV1SupplierSalesGet($date_from, $flag);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->apiV1SupplierSalesGet: ', $e->getMessage(), PHP_EOL;
@@ -284,7 +665,6 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key** | **string**| Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». |
  **date_from** | **string**| Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; |
  **flag** | **int**| Если параметр &#x60;flag&#x3D;0&#x60; (или не указан в строке запроса), при вызове API возвращаются данные,  у которых значение поля &#x60;lastChangeDate&#x60; (дата время обновления информации в сервисе) больше или равно переданному  значению параметра &#x60;dateFrom&#x60;.  При этом количество возвращенных строк данных варьируется в интервале от 0 до примерно 100 000. &lt;br&gt; Если параметр &#x60;flag&#x3D;1&#x60;, то будет выгружена информация обо всех заказах или продажах с датой,  равной переданному параметру &#x60;dateFrom&#x60; (в данном случае время в дате значения не имеет).  При этом количество возвращенных строк данных будет равно количеству всех заказов или продаж,  сделанных в указанную дату, переданную в параметре &#x60;dateFrom&#x60;. | [optional] [default to 0]
 
@@ -294,7 +674,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../../README.md#ApiKey)
+[HeaderApiKey](../../README.md#HeaderApiKey)
 
 ### HTTP request headers
 
@@ -304,7 +684,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **apiV1SupplierStocksGet**
-> \Wildberries\Client\Model\StocksItem[] apiV1SupplierStocksGet($key, $date_from)
+> \Wildberries\Client\Model\StocksItem[] apiV1SupplierStocksGet($date_from)
 
 Склад
 
@@ -314,10 +694,10 @@ Name | Type | Description  | Notes
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-// Configure API key authorization: ApiKey
-$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('key', 'YOUR_API_KEY');
+// Configure API key authorization: HeaderApiKey
+$config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('key', 'Bearer');
+// $config = Wildberries\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
 
 $apiInstance = new Wildberries\Client\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -325,11 +705,10 @@ $apiInstance = new Wildberries\Client\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$key = "key_example"; // string | Ключ аутентификации.<br>  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API».
 $date_from = "date_from_example"; // string | Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера `Z` в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). <br>Примеры: <ul> <li> `2019-06-20` <li> `2019-06-20T00:00:00Z` <li> `2019-06-20T23:59:59` <li> `2019-06-20T00:00:00.12345Z` <li> `2019-06-20T00:00:00.12345` <li> `2017-03-25T00:00:00` </ul>
 
 try {
-    $result = $apiInstance->apiV1SupplierStocksGet($key, $date_from);
+    $result = $apiInstance->apiV1SupplierStocksGet($date_from);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->apiV1SupplierStocksGet: ', $e->getMessage(), PHP_EOL;
@@ -341,7 +720,6 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key** | **string**| Ключ аутентификации.&lt;br&gt;  Генерируется самостоятельно на портале Продавца в разделе «Профиль» - «Настройки» - «Доступ к API». |
  **date_from** | **string**| Дата в формате RFC3339. Можно передать дату или дату со временем.  Время можно указывать с точностью до секунд или миллисекунд.  Литера &#x60;Z&#x60; в конце строки означает, что время передается в UTC-часовом поясе.  При ее отсутствии время считается в часовом поясе МСК (UTC+3). &lt;br&gt;Примеры: &lt;ul&gt; &lt;li&gt; &#x60;2019-06-20&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00Z&#x60; &lt;li&gt; &#x60;2019-06-20T23:59:59&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345Z&#x60; &lt;li&gt; &#x60;2019-06-20T00:00:00.12345&#x60; &lt;li&gt; &#x60;2017-03-25T00:00:00&#x60; &lt;/ul&gt; |
 
 ### Return type
@@ -350,7 +728,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../../README.md#ApiKey)
+[HeaderApiKey](../../README.md#HeaderApiKey)
 
 ### HTTP request headers
 
